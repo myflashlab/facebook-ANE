@@ -71,8 +71,8 @@ checkout here for the commercial version: http://myappsnippet.com/facebook-sdk-a
 <activity android:name="com.facebook.FacebookActivity" android:theme="@style/Theme.Transparent" />
 <activity android:name="com.doitflash.facebook.access.MyLogin" android:theme="@style/Theme.Transparent" />
 
-<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
-<provider android:authorities="com.facebook.app.FacebookContentProvider134318226739783" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
+<!-- This is required for sharing. you must enter your FB app ID at the end of com.facebook.app.FacebookContentProvider again -->
+<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
 <activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
 ```
 
