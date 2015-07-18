@@ -11,8 +11,8 @@ Main features:
 * full access to Facebook Graph API… the sky is the limit!
 
 Tutorials:
-* ![Understanding how Facebook SDK works in general](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-1)
-* ![Creating a Facebook application. A place for your app to connect to](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-2)
+* [Understanding how Facebook SDK works in general](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-1)
+* [Creating a Facebook application. A place for your app to connect to](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-2)
 
 checkout here for the commercial version: http://myappsnippet.com/facebook-sdk-air-native-extension/
 
