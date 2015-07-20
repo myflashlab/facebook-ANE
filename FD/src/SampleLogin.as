@@ -141,7 +141,7 @@ package
 		private function init():void
 		{
 			// call this method only once in your app loading up
-			FB.getInstance("134318226739783");
+			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
 			
 			// -------------------------
@@ -211,101 +211,6 @@ package
 			
 			// -------------------------
 			
-			
-			
-			
-			
-			/*_fb = FB.getInstance("134318226739783");
-			trace("hash key = ", FB.hashKey);
-			
-			_fb.addEventListener(StatusEvent.STATUS, onStatus);
-			
-			var txt:TextField = new TextField()
-			txt.autoSize = TextFieldAutoSize.LEFT;
-			txt.multiline = false;
-			txt.border = true;
-			txt.x = 10;
-			txt.y = 200;
-			txt.background = true;
-			txt.type = TextFieldType.INPUT;
-			txt.defaultTextFormat = new TextFormat("Tahoma", 50, 0x9900);
-			txt.text = "/me";
-			this.addChild(txt);
-			
-			
-			
-			var btn0:MySprite = createBtn("is login?");
-			btn0.addEventListener(MouseEvent.CLICK, islogin);
-			_list.add(btn0);
-			
-			function islogin(e:MouseEvent):void
-			{
-				C.log(_fb.context.call("command", "isLogin"));
-				trace("getToken = " + _fb.context.call("command", "getToken"));
-				trace("getPermissions = " + _fb.context.call("command", "getPermissions"));
-				trace("getDeclinedPermissions = " + _fb.context.call("command", "getDeclinedPermissions"));
-				
-				//
-				  	//we can use the graph for many things like:
-				    //https://graph.facebook.com/v2.3/me/permissions?access_token=CAAB6K
-				  	//the above link will return:
-				   	//
-				    //{
-					   //"data": [
-						  //{
-							 //"permission": "user_friends",
-							 //"status": "granted"
-						  //},
-						  //{
-							 //"permission": "public_profile",
-							 //"status": "granted"
-						  //},
-						  //{
-							 //"permission": "email",
-							 //"status": "declined"
-						  //}
-					   //]
-					//}
-				 //
-			}
-			
-			// ---------------------------
-			
-			var btn1:MySprite = createBtn("login");
-			btn1.addEventListener(MouseEvent.CLICK, login);
-			_list.add(btn1);
-			
-			function login(e:MouseEvent):void
-			{
-				_fb.context.call("command", "login", ["public_profile", "user_friends", "email"]);
-			}
-			
-			// -------------------------
-			
-			var btn2:MySprite = createBtn("logout");
-			btn2.addEventListener(MouseEvent.CLICK, logout);
-			_list.add(btn2);
-			
-			function logout(e:MouseEvent):void
-			{
-				_fb.context.call("command", "logout");
-			}
-			
-			// -------------------------
-			
-			var btn3:MySprite = createBtn("sample graph request");
-			btn3.addEventListener(MouseEvent.CLICK, graphRequest);
-			_list.add(btn3);
-			
-			function graphRequest(e:MouseEvent):void
-			{
-				// https://developers.facebook.com/docs/graph-api/reference
-				_fb.context.call("command", "graphRequest", txt.text);
-			}
-			
-			// -------------------------
-			
-			*/
 		}
 		
 		

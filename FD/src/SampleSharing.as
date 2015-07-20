@@ -140,7 +140,7 @@ package
 		
 		private function init():void
 		{
-			FB.getInstance("134318226739783");
+			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
 			
 			var btn1:MySprite = createBtn("share a link");
@@ -172,47 +172,6 @@ package
 				
 				C.log($status);
 			}
-			
-			
-			
-			
-			
-			
-			
-			/*_fb = FB.getInstance("134318226739783");
-			trace("hash key = ", FB.hashKey);
-			
-			_fb.addEventListener(StatusEvent.STATUS, onStatus);
-			
-			// -------------------------
-			
-			var btn1:MySprite = createBtn("share link");
-			btn1.addEventListener(MouseEvent.CLICK, shareLink);
-			_list.add(btn1);
-			
-			function shareLink(e:MouseEvent):void
-			{
-				_fb.context.call("command", "shareModel_link", "http://myappsnippet.com", "title!", "http://myappsnippet.com/wp-content/uploads/2015/07/bundle-Jul-2015-adobe-air-extension_preview.jpg", "description!");
-			}*/
-			
-			// -------------------------
-			
-			
-			
-			// -------------------------
-			
-			
-			
-			// -------------------------
-			
-			
-		}
-		
-		private function onStatus(e:StatusEvent):void
-		{
-			C.log(e.code + " | " + e.level);
-			
-			
 		}
 		
 		

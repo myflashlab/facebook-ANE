@@ -140,7 +140,7 @@ package
 		
 		private function init():void
 		{
-			FB.getInstance("134318226739783");
+			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
 			
 			var btn1:MySprite = createBtn("create LIKE btn");
@@ -177,56 +177,6 @@ package
 			{
 				_btn.setVisibility(!_btn.isVisible);
 			}
-			
-			/*_ex = new FB();
-			_ex.addEventListener(StatusEvent.STATUS, onStatus);
-			
-			_ex.context.call("command", "init", "134318226739783");
-			var hashKey:String = _ex.context.call("command", "getHashKey") as String;
-			trace(hashKey);
-			
-			var btn1:MySprite = createBtn("Like button");
-			btn1.addEventListener(MouseEvent.CLICK, likeBtn);
-			_list.add(btn1);
-			
-			function likeBtn(e:MouseEvent):void
-			{
-				_ex.context.call("command", "createLikeBtn", 100, 100, 1, "https://www.facebook.com/myflashlab", 2);
-			}
-			
-			// -------------------------
-			
-			var btn2:MySprite = createBtn("Like button set pos");
-			btn2.addEventListener(MouseEvent.CLICK, likeBtnSetPos);
-			_list.add(btn2);
-			
-			function likeBtnSetPos(e:MouseEvent):void
-			{
-				_ex.context.call("command", "setPositionLikeBtn", 0, 200, 200);
-			}
-			
-			// -------------------------
-			
-			var btn3:MySprite = createBtn("remove btn");
-			btn3.addEventListener(MouseEvent.CLICK, removeBtn);
-			_list.add(btn3);
-			
-			function removeBtn(e:MouseEvent):void
-			{
-				_ex.context.call("command", "removeLikeBtn", 0);
-			}
-			
-			// -------------------------
-			
-			var btn4:MySprite = createBtn("toggle visibility");
-			btn4.addEventListener(MouseEvent.CLICK, toggleBtn);
-			_list.add(btn4);
-			
-			function toggleBtn(e:MouseEvent):void
-			{
-				var isVisible:Boolean = _ex.context.call("command", "isLikeBtnVisible", 0) as Boolean;
-				_ex.context.call("command", "setLikeBtnVisibility", 0, !isVisible);
-			}*/
 		}
 		
 		private var _btn:LikeBtn;
@@ -265,13 +215,6 @@ package
 			btn = null;
 			C.log("btn.dispose();");*/
 		}
-		
-		/*private function onStatus(e:StatusEvent):void
-		{
-			C.log(e.code + " | " + e.level);
-			
-			
-		}*/
 		
 		
 		
