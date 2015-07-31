@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/18.0">
   <id>com.doitflash.exFacebook2</id>
-  <versionNumber>1.0</versionNumber>
+  <versionNumber>2.0</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exFacebook</filename>
   <name>exFacebook</name>
@@ -27,11 +27,11 @@
 			
 			
 			<!-- This is required for logging in -->
-			<activity android:name="com.facebook.FacebookActivity" android:theme="@style/Theme.Transparent" />
-			<activity android:name="com.doitflash.facebook.access.MyLogin" android:theme="@style/Theme.Transparent" />
+			<activity android:name="com.facebook.FacebookActivity" 			android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" 	android:theme="@style/Theme.Transparent" />
+			<activity android:name="com.doitflash.facebook.access.MyLogin" 	android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"	android:theme="@style/Theme.Transparent" />
 			
 			<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
-			<provider android:authorities="com.facebook.app.FacebookContentProvider134318226739783" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
+			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
 			<activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
 			
 		</application>
@@ -58,6 +58,22 @@
 		<key>UIPrerenderedIcon</key>
 		<true />
 		
+		<key>FacebookAppID</key>
+		<string>000000000000000</string>
+		
+		<key>FacebookDisplayName</key>
+		<string>Air Native Extension</string>
+		
+		<key>CFBundleURLTypes</key>
+		<array> 
+			<dict>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>fb000000000000000</string>
+				</array>
+			</dict>
+		</array>
+		
 		<key>UIDeviceFamily</key>
 		<array>
 			<!-- iPhone support -->
@@ -72,7 +88,7 @@
     <title>exFacebook</title>
     <content>exFacebook.swf</content>
     <visible>true</visible>
-    <fullScreen>false</fullScreen>
+    <fullScreen>true</fullScreen>
     <autoOrients>false</autoOrients>
     <renderMode>direct</renderMode>
     <systemChrome>standard</systemChrome>

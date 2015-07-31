@@ -149,7 +149,7 @@ package
 			
 			function likeBtn(e:MouseEvent):void
 			{
-				var like1:LikeBtn = FB.createLikeBtn("https://www.facebook.com/myflashlab", LikeBtn.STYLE_STANDARD, LikeBtn.LINK_TYPE_PAGE);
+				var like1:LikeBtn = FB.createLikeBtn("https://www.facebook.com/myflashlab", LikeBtn.STYLE_STANDARD, LikeBtn.LINK_TYPE_PAGE, stage);
 				like1.name = "like" + Math.random();
 				like1.addEventListener(FBEvent.LIKE_BTN_CREATED, onBtnCreated);
 				like1.addEventListener(FBEvent.LIKE_BTN_ERROR, onBtnError);

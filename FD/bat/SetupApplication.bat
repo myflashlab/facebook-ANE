@@ -18,7 +18,7 @@ set AND_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%AND_CERT_FILE%" -storepass
 set IOS_DIST_CERT_FILE=cert\CertificatesDistribute.p12
 set IOS_DEV_CERT_FILE=cert\certificate_dev.p12
 set IOS_DEV_CERT_PASS=pass
-set IOS_PROVISION_DEV=cert\exFacebook.mobileprovision
+set IOS_PROVISION_DEV=cert\comDoitflash.mobileprovision
 set IOS_PROVISION_DIST=cert\adHoc_exAR.mobileprovision
 set IOS_PROVISION_ADHOC=cert\adHoc_exAR.mobileprovision
 set IOS_ICONS=icons/ios
@@ -42,7 +42,7 @@ set DIST_PATH=dist
 set DIST_NAME=exFacebook
 
 :: Debugging using a custom IP
-set DEBUG_IP=192.168.0.12
+set DEBUG_IP=192.168.0.11
 
 
 

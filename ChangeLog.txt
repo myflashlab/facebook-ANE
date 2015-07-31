@@ -2,3 +2,6 @@ Facebook SDK Adobe Air Native Extension
 
 
 Jul 17, 2015	>> V1.0: 	beginning of the journey!
+
+Jul 31, 2015 	>> V2.0:	Added iOS support.
+				Minor bug fixes on Android side.

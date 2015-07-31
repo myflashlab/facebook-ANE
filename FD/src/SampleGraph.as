@@ -153,6 +153,7 @@ package
 			txt.background = true;
 			txt.type = TextFieldType.INPUT;
 			txt.defaultTextFormat = new TextFormat("Tahoma", 50, 0x9900);
+			//txt.text = "/me?fields=id,name,email,picture,cover&metadata=0";
 			txt.text = "/me";
 			this.addChild(txt);
 			// -------------------------
@@ -183,25 +184,10 @@ package
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE, onResponse);
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onError);
 				
+				C.log("ERROR!");
 				C.log(event.param);
 				C.log("----------------");
 			}
-			
-			// -------------------------
-			
-			
-			
-			
-			// -------------------------
-			
-			
-			
-			
-			// -------------------------
-			
-			
-			
-			
 		}
 		
 		

@@ -1,6 +1,7 @@
 package 
 {
 	import com.doitflash.air.extensions.facebook.access.Permissions;
+	import com.doitflash.air.extensions.facebook.access.LogManager;
 	import com.doitflash.air.extensions.facebook.FB;
 	import com.doitflash.air.extensions.facebook.FBEvent;
 	import com.doitflash.consts.Direction;
@@ -168,7 +169,8 @@ package
 				FB.logManager.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
 				FB.logManager.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
 				FB.logManager.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-				FB.logManager.requestPermission(Permissions.public_profile, Permissions.user_friends, Permissions.email);
+				FB.logManager.requestPermission(LogManager.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
+				//FB.logManager.requestPermission(LogManager.WITH_PUBLISH_PERMISSIONS, Permissions.publish_actions);
 			}
 			
 			function onLoginSuccess(event:FBEvent):void
@@ -208,9 +210,6 @@ package
 			{
 				FB.logManager.logout();
 			}
-			
-			// -------------------------
-			
 		}
 		
 		
