@@ -5,3 +5,7 @@ Jul 17, 2015	>> V1.0: 	beginning of the journey!
 
 Jul 31, 2015 	>> V2.0:	Added iOS support.
 				Minor bug fixes on Android side.
+
+Sep 08, 2015 	>> V3.0:	Added support for App invites https://developers.facebook.com/docs/app-invites
+				Fixed Like button bug in Android where the button interface was not being updated after coming back to the flash app
+				Requires commonDependenciesV4.0.ane or higher https://github.com/myflashlab/common-dependencies-ANE

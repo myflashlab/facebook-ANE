@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'7/31/2015'</value>
+      <value>'9/8/2015'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -34,16 +34,17 @@
     <omit-trace-statements>true</omit-trace-statements>
     <verbose-stacktraces>false</verbose-stacktraces>
     <source-path append="true">
-      <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V1.0\FD\src</path-element>
+      <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V3.0\FD\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V1.0\FD\lib\commonDependencies.ane</path-element>
-      <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V1.0\FD\lib\facebook.ane</path-element>
+      <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V3.0\FD\lib\facebook.ane</path-element>
+      <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V3.0\FD\lib\greensock.swc</path-element>
+      <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V3.0\FD\lib\commonDependenciesV4.0.ane</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V1.0\FD\src\SampleGraph.as</path-element>
+    <path-element>E:\project\products\AIR_EXTENSIONS\facebook\V3.0\FD\src\Demo.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

@@ -1,6 +1,6 @@
-# Facebook SDK ANE V2.0 (Android + iOS)
+# Facebook SDK ANE V3.0 (Android + iOS)
 
-This extension is the cleanest and the most easy to work with Facebook API you can find online. don’t take my word for it. download it for free from here and test it for yourself. this will be your best solution to integrate Facebook into your Adobe Air apps.
+This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe Air apps.
 
 Main features:
 * Login/logout
@@ -8,7 +8,8 @@ Main features:
 * decide on your app logic based on granted permissions
 * Share URL links directly from your app
 * create Facebook like button and place it inside your Air app
-* full access to Facebook Graph API… the sky is the limit!
+* send App Invite to friends
+* full access to Facebook Graph API... the sky is the limit!
 * works on Android and iOS with an identical AS3 library
 
 Tutorials:
@@ -29,7 +30,7 @@ checkout here for the commercial version: http://myappsnippet.com/facebook-sdk-a
 **NOTICE: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.**
 
 # Requirements:
-1. you will need to add [commonDependenciesV2.0.ane](https://github.com/myflashlab/common-dependencies-ANE) to your project.
+1. you will need to add [commonDependenciesV4.0.ane](https://github.com/myflashlab/common-dependencies-ANE) to your project.
 2. Compile with Air SDK 18 or above.
 3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
   - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
@@ -100,6 +101,7 @@ checkout here for the commercial version: http://myappsnippet.com/facebook-sdk-a
 					<action android:name="android.intent.action.VIEW" />
 					<category android:name="android.intent.category.BROWSABLE" />
 					<category android:name="android.intent.category.DEFAULT" />
+					<data android:scheme="air.com.doitflash.exfacebook2" />
 				</intent-filter>
 			</activity>
 			
@@ -112,6 +114,9 @@ checkout here for the commercial version: http://myappsnippet.com/facebook-sdk-a
 			<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
 			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
 			<activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
+			
+			<!-- This is required for app invite feature -->
+			<activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
 			
 		</application>
 		
@@ -147,6 +152,7 @@ checkout here for the commercial version: http://myappsnippet.com/facebook-sdk-a
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>fb000000000000000</string>
+					<string>air.com.doitflash.exfacebook2</string>
 				</array>
 			</dict>
 		</array>
@@ -163,4 +169,7 @@ checkout here for the commercial version: http://myappsnippet.com/facebook-sdk-a
   </iPhone>
 ```
 
-This extension works on Android SDK 11 or higher and iOS 6.1 or higher
+* This extension works on Android SDK 11 or higher and iOS 6.1 or higher
+* When compiling on Android, make sure you are always compiling in captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
+* And again, when compiling on Android, sometimes, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as explained below.
+* When compiling with commonDependenciesV4.0.ane you will notice that your project compile time will take longer than usual (specially if you are on a windows 32-bit). unfortunaitly this happens because V4.0 of our dependency ane is using the latest version of Google services and Adobe compiler takes just too much time to compile .apk! we are hoping that Adobe will fix this issue soon with the new Air SDK.

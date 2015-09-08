@@ -62,8 +62,9 @@
     <element path="lib\downloadManager.ane" />
     <element path="lib\webView.ane" />
     <element path="lib\alarmManager.ane" />
-    <element path="lib\commonDependencies.ane" />
     <element path="lib\facebook.ane" />
+    <element path="lib\greensock.swc" />
+    <element path="lib\commonDependenciesV4.0.ane" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -83,7 +84,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\SampleGraph.as" />
+    <compile path="src\Demo.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

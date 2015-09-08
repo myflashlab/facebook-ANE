@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/18.0">
   <id>com.doitflash.exFacebook2</id>
-  <versionNumber>2.0</versionNumber>
+  <versionNumber>3.0</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exFacebook</filename>
   <name>exFacebook</name>
@@ -21,6 +21,7 @@
 					<action android:name="android.intent.action.VIEW" />
 					<category android:name="android.intent.category.BROWSABLE" />
 					<category android:name="android.intent.category.DEFAULT" />
+					<data android:scheme="air.com.doitflash.exfacebook2" />
 				</intent-filter>
 			</activity>
 			
@@ -33,6 +34,9 @@
 			<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
 			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
 			<activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
+			
+			<!-- This is required for app invite feature -->
+			<activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
 			
 		</application>
 		
@@ -70,6 +74,7 @@
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>fb000000000000000</string>
+					<string>air.com.doitflash.exfacebook2</string>
 				</array>
 			</dict>
 		</array>
