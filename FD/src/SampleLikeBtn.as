@@ -1,8 +1,8 @@
 package 
 {
-	import com.doitflash.air.extensions.facebook.FB;
-	import com.doitflash.air.extensions.facebook.FBEvent;
-	import com.doitflash.air.extensions.facebook.LikeBtn;
+	import com.myflashlab.air.extensions.facebook.FB;
+	import com.myflashlab.air.extensions.facebook.FBEvent;
+	import com.myflashlab.air.extensions.facebook.LikeBtn;
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
 	import com.doitflash.mobileProject.commonCpuSrc.DeviceInfo;
@@ -26,6 +26,7 @@ package
 	import flash.ui.Keyboard;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
+	import flash.utils.setTimeout;
 	
 	/**
 	 * 

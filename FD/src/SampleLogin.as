@@ -1,9 +1,9 @@
 package 
 {
-	import com.doitflash.air.extensions.facebook.access.Permissions;
-	import com.doitflash.air.extensions.facebook.access.LogManager;
-	import com.doitflash.air.extensions.facebook.FB;
-	import com.doitflash.air.extensions.facebook.FBEvent;
+	import com.myflashlab.air.extensions.facebook.access.Permissions;
+	import com.myflashlab.air.extensions.facebook.access.LogManager;
+	import com.myflashlab.air.extensions.facebook.FB;
+	import com.myflashlab.air.extensions.facebook.FBEvent;
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
 	import com.doitflash.mobileProject.commonCpuSrc.DeviceInfo;

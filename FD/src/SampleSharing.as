@@ -1,7 +1,7 @@
 package 
 {
-	import com.doitflash.air.extensions.facebook.FB;
-	import com.doitflash.air.extensions.facebook.sharing.ShareLink;
+	import com.myflashlab.air.extensions.facebook.FB;
+	import com.myflashlab.air.extensions.facebook.sharing.ShareLink;
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
 	import com.doitflash.mobileProject.commonCpuSrc.DeviceInfo;
