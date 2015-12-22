@@ -159,8 +159,12 @@ package
 		
 		private function init():void
 		{
+			// required only if you are a member of the club
+			FB.clubId = "paypal-address-you-used-to-join-the-club";
+			
 			// App link: https://fb.me/477806509057618
 			FB.getInstance("00000000000");
+			trace("hash key = ", FB.hashKey);
 			
 			var btn1:MySprite = createBtn("Test Login and Graph");
 			btn1.addEventListener(MouseEvent.CLICK, toLogin);
@@ -170,7 +174,7 @@ package
 			{
 				if (FB.logManager.isLogin)
 				{
-					//C.log("you are already logged in! Please wait till I load your name, email and profile picture from the Graph");
+					C.log("You are now logged out... Please hit the button again to login back!");
 					//toGraph();
 					FB.logManager.logout();
 				}
@@ -316,8 +320,8 @@ package
 			{
 				var shareModel:ShareLink = new ShareLink();
 				shareModel.contentTitle = "Cool ANEs in one basket!";
-				shareModel.contentURL = "http://myappsnippet.com";
-				shareModel.imageURL = "http://myflashlab.com/myflashlab2.jpg";
+				shareModel.contentURL = "http://myflashlabs.com";
+				shareModel.imageURL = "http://myflashlabs.com/myflashlab2.jpg";
 				shareModel.contentDescription = "This is a test description message to see how sharing works!";
 				FB.share(shareModel, onSharingResult);
 			}
@@ -373,7 +377,7 @@ package
 			function toAppInvite(e:MouseEvent):void
 			{
 				// how to generate a unique app invite link: https://developers.facebook.com/quickstarts/?platform=app-links-host
-				C.log("app invite can show? " + FB.appInvite("https://fb.me/477806509057618", "http://myappsnippet.com/wp-content/uploads/2015/07/facebook-adobe-air-extension_preview.jpg", onInviteResult));
+				C.log("app invite can show? " + FB.appInvite("https://fb.me/477806509057618", "http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg", onInviteResult));
 			}
 			
 			function onInviteResult($status:String, $msg:String):void

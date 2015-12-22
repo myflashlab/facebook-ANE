@@ -140,6 +140,9 @@ package
 		
 		private function init():void
 		{
+			// required only if you are a member of the club
+			FB.clubId = "paypal-address-you-used-to-join-the-club";
+			
 			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
 			
@@ -149,7 +152,7 @@ package
 			txt.multiline = false;
 			txt.border = true;
 			txt.x = 10;
-			txt.y = 200;
+			txt.y = 500;
 			txt.background = true;
 			txt.type = TextFieldType.INPUT;
 			txt.defaultTextFormat = new TextFormat("Tahoma", 50, 0x9900);

@@ -11,3 +11,4 @@ Sep 08, 2015 	>> V3.0:	Added support for App invites https://developers.facebook
 				Requires commonDependenciesV4.0.ane or higher https://github.com/myflashlab/common-dependencies-ANE
 
 Nov 02, 2015 	>> V3.9:	doitflash devs merged into MyFLashLab Team.
+Dec 20, 2015 	>> V3.9.1: 	minor bug fixes

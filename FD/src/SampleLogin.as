@@ -141,6 +141,9 @@ package
 		
 		private function init():void
 		{
+			// required only if you are a member of the club
+			FB.clubId = "paypal-address-you-used-to-join-the-club";
+			
 			// call this method only once in your app loading up
 			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);

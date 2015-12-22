@@ -140,6 +140,9 @@ package
 		
 		private function init():void
 		{
+			// required only if you are a member of the club
+			FB.clubId = "paypal-address-you-used-to-join-the-club";
+			
 			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
 			
@@ -151,8 +154,8 @@ package
 			{
 				var shareModel:ShareLink = new ShareLink();
 				shareModel.contentTitle = "title!";
-				shareModel.contentURL = "http://myappsnippet.com";
-				shareModel.imageURL = "http://myappsnippet.com/wp-content/uploads/2015/07/bundle-Jul-2015-adobe-air-extension_preview.jpg";
+				shareModel.contentURL = "http://myflashlabs.com";
+				shareModel.imageURL = "http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg";
 				shareModel.contentDescription = "description!";
 				FB.share(shareModel, onSharingResult);
 			}

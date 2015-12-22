@@ -141,6 +141,9 @@ package
 		
 		private function init():void
 		{
+			// required only if you are a member of the club
+			FB.clubId = "paypal-address-you-used-to-join-the-club";
+			
 			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
 			
@@ -193,7 +196,8 @@ package
 			C.log("width = " + btn.width);
 			C.log("height = " + btn.height);
 			
-			btn.update("http://www.myappsnippet.com/", LikeBtn.STYLE_BOX_COUNT, LikeBtn.LINK_TYPE_OPEN_GRAPH);
+			setTimeout(btn.update, 5000, "http://www.myflashlabs.com", LikeBtn.STYLE_STANDARD, LikeBtn.LINK_TYPE_OPEN_GRAPH);
+			//btn.update("http://www.myflashlabs.com", LikeBtn.STYLE_STANDARD, LikeBtn.LINK_TYPE_OPEN_GRAPH);
 		}
 		
 		private function onBtnError(e:FBEvent):void
