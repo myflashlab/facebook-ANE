@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'12/22/2015'</value>
+      <value>'1/20/2016'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -45,7 +45,7 @@
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\project\products\MyFlashLab_ANEs\facebook\V3.9.1\FD\src\SampleSharing.as</path-element>
+    <path-element>E:\project\products\MyFlashLab_ANEs\facebook\V3.9.1\FD\src\Demo.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

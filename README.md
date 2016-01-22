@@ -1,4 +1,4 @@
-# Facebook SDK ANE V3.9.1 (Android + iOS)
+# Facebook SDK ANE V3.9.2 (Android + iOS)
 
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe Air apps.
 
@@ -25,18 +25,9 @@ Tutorials:
 
 checkout here for the commercial version: http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 
-![Facebook SDK ANE](http://myappsnippet.com/wp-content/uploads/2015/07/facebook-adobe-air-extension_preview.jpg)
+![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
 
 **NOTICE: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.**
-
-# Requirements:
-1. you will need to add [commonDependenciesV4.0.ane](https://github.com/myflashlab/common-dependencies-ANE) to your project.
-2. Compile with Air SDK 18 or above.
-3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
-  - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
-  - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
-  - when in your Air SDK, go to "\lib\aot\stub". here you will find all the iOS frameworks provided by Air SDK by default.
-  - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
 
 # AS3 API:
 ###### Login sample. (find more samples in repository)
@@ -169,7 +160,36 @@ checkout here for the commercial version: http://www.myflashlabs.com/product/fac
   </iPhone>
 ```
 
-* This extension works on Android SDK 11 or higher and iOS 6.1 or higher
-* When compiling on Android, make sure you are always compiling in captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
-* And again, when compiling on Android, sometimes, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as explained below.
+# Requirements:
+1. you will need to add [commonDependenciesV4.0.ane](https://github.com/myflashlab/common-dependencies-ANE) to your project.
+2. Compile with Air SDK 18 or above.
+3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
+  - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
+  - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
+  - when in your Air SDK, go to "\lib\aot\stub". here you will find all the iOS frameworks provided by Air SDK by default.
+  - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
+4. Android SDK 11 or higher 
+5. iOS 6.1 or higher
+6. When compiling on Android, make sure you are always compiling in captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
+
+# Notices:
+* When compiling on Android, sometimes, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as explained below.
 * When compiling with commonDependenciesV4.0.ane you will notice that your project compile time will take longer than usual (specially if you are on a windows 32-bit). unfortunately this happens because V4.0 of our dependency ane is using the latest version of Google services and Adobe compiler takes just too much time to compile .apk! we are hoping that Adobe will fix this issue soon with the new Air SDK. we have already reported this on Adobe forums: https://forums.adobe.com/thread/1948895
+
+# Changelog
+* Jul 17, 2015	>> V1.0: 	beginning of the journey!
+
+* Jul 31, 2015 	>> V2.0:	Added iOS support.
+  *				Minor bug fixes on Android side.
+
+* Sep 08, 2015 	>> V3.0:	Added support for App invites https://developers.facebook.com/docs/app-invites
+  *				Fixed Like button bug in Android where the button interface was not being updated after coming back to the flash app
+  *				Requires commonDependenciesV4.0.ane or higher https://github.com/myflashlab/common-dependencies-ANE
+
+* Nov 02, 2015 	>> V3.9:	doitflash devs merged into MyFLashLab Team.
+* Dec 20, 2015 	>> V3.9.1: 	minor bug fixes
+
+* Jan 20, 2016 	>> V3.9.2: 	bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem.
+  *							This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater.
+  *							https://forums.adobe.com/thread/2055508
+  *							https://forums.adobe.com/message/8294948

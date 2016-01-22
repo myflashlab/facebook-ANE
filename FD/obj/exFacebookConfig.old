@@ -45,7 +45,7 @@
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\project\products\MyFlashLab_ANEs\facebook\V3.9.1\FD\src\SampleLogin.as</path-element>
+    <path-element>E:\project\products\MyFlashLab_ANEs\facebook\V3.9.1\FD\src\Demo.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
