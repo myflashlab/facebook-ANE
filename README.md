@@ -1,5 +1,4 @@
 # Facebook SDK ANE V3.9.2 (Android + iOS)
-
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe Air apps.
 
 Main features:
@@ -12,25 +11,14 @@ Main features:
 * full access to Facebook Graph API... the sky is the limit!
 * works on Android and iOS with an identical AS3 library
 
-Tutorials:
-* [Understanding how Facebook SDK works in general](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-1)
-* [Creating a Facebook application. A place for your app to connect to](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-2)
-* [Connecting your FB app to your mobile app with a hash key](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-3)
-* [Managing login/out and asking permissions from users](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-4)
-* [Generating real Facebook Like buttons in your apps](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-5)
-* [Knowing how to share content from your app](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-6)
-* [Understanding Facebook Graph API. how to request for information](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-7)
-* [Setting up the Air manifest .xml file for Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-8)
-* [Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)
+# Demo .apk
+you may like to see the ANE in action? [Download demo .apk](https://github.com/myflashlab/facebook-ANE/tree/master/FD/dist)
 
-checkout here for the commercial version: http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
+**NOTICE**: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.
+[Download the ANE](https://github.com/myflashlab/facebook-ANE/tree/master/FD/lib)
 
-![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
-
-**NOTICE: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.**
-
-# AS3 API:
-###### Login sample. (find more samples in repository)
+# Air Usage
+###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/FD/src)
 ```actionscript
      FB.getInstance("000000000000000"); // facebook app ID you received from your Facebook API console
      trace("hash key = ", FB.hashKey); // required once for Android only
@@ -74,7 +62,7 @@ checkout here for the commercial version: http://www.myflashlabs.com/product/fac
      
 ```
 
-# Manifest setup:
+# Air .xml manifest
 ```xml
   <android>
     <manifestAdditions>
@@ -172,24 +160,50 @@ checkout here for the commercial version: http://www.myflashlabs.com/product/fac
 5. iOS 6.1 or higher
 6. When compiling on Android, make sure you are always compiling in captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
 
-# Notices:
+# Commercial Version
+http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
+
+![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
+
+# Tech Details
 * When compiling on Android, sometimes, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as explained below.
 * When compiling with commonDependenciesV4.0.ane you will notice that your project compile time will take longer than usual (specially if you are on a windows 32-bit). unfortunately this happens because V4.0 of our dependency ane is using the latest version of Google services and Adobe compiler takes just too much time to compile .apk! we are hoping that Adobe will fix this issue soon with the new Air SDK. we have already reported this on Adobe forums: https://forums.adobe.com/thread/1948895
 
+# Tutorials
+[How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
+[Understanding how Facebook SDK works in general](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-1)  
+[Creating a Facebook application. A place for your app to connect to](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-2)  
+[Connecting your FB app to your mobile app with a hash key](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-3)  
+[Managing login/out and asking permissions from users](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-4)  
+[Generating real Facebook Like buttons in your apps](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-5)  
+[Knowing how to share content from your app](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-6)  
+[Understanding Facebook Graph API. how to request for information](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-7)  
+[Setting up the Air manifest .xml file for Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-8)  
+[Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)  
+
 # Changelog
-* Jul 17, 2015	>> V1.0: 	beginning of the journey!
+*Jan 20, 2016 - V3.9.2*
+* bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
 
-* Jul 31, 2015 	>> V2.0:	Added iOS support.
-  *				Minor bug fixes on Android side.
 
-* Sep 08, 2015 	>> V3.0:	Added support for App invites https://developers.facebook.com/docs/app-invites
-  *				Fixed Like button bug in Android where the button interface was not being updated after coming back to the flash app
-  *				Requires commonDependenciesV4.0.ane or higher https://github.com/myflashlab/common-dependencies-ANE
+*Dec 20, 2015 - V3.9.1*
+* minor bug fixes
 
-* Nov 02, 2015 	>> V3.9:	doitflash devs merged into MyFLashLab Team.
-* Dec 20, 2015 	>> V3.9.1: 	minor bug fixes
 
-* Jan 20, 2016 	>> V3.9.2: 	bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem.
-  *							This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater.
-  *							https://forums.adobe.com/thread/2055508
-  *							https://forums.adobe.com/message/8294948
+*Nov 02, 2015 - V3.9*
+* doitflash devs merged into MyFLashLab Team
+
+
+*Sep 08, 2015 - V3.0*
+* Added support for App invites https://developers.facebook.com/docs/app-invites
+* Fixed Like button bug in Android where the button interface was not being updated after coming back to the flash app
+* Requires commonDependenciesV4.0.ane or higher https://github.com/myflashlab/common-dependencies-ANE
+
+
+*Jul 31, 2015 - V2.0*
+* Added iOS support
+* Minor bug fixes on Android side
+
+
+*Jul 17, 2015 - V1.0*
+* beginning of the journey!
