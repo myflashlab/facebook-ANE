@@ -6,64 +6,77 @@
   <filename>exFacebook</filename>
   <name>FB ANE</name>
   <android>
-    <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:hardwareAccelerated="true" android:allowBackup="true">
-		<activity android:hardwareAccelerated="false">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<data android:scheme="air.com.doitflash.exfacebook2" />
-			</intent-filter>
-		</activity>
-		<!-- This is required for logging in -->
-		<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.NoDisplay" />
-		<activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@style/Theme.Transparent" />
-		<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
-		<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true" />
-		<activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
-		<!-- This is required for app invite feature -->
-		<activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
-	</application>
-</manifest>]]></manifestAdditions>
+    <manifestAdditions><![CDATA[
+	<manifest android:installLocation="auto">
+		<uses-permission android:name="android.permission.WAKE_LOCK" />
+		<uses-permission android:name="android.permission.INTERNET" />
+	
+		<application android:hardwareAccelerated="true" android:allowBackup="true">
+			<activity android:hardwareAccelerated="false">
+				<intent-filter>
+					<action android:name="android.intent.action.MAIN" />
+					<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+				<intent-filter>
+					<action android:name="android.intent.action.VIEW" />
+					<category android:name="android.intent.category.BROWSABLE" />
+					<category android:name="android.intent.category.DEFAULT" />
+					<data android:scheme="air.com.doitflash.exfacebook2" />
+				</intent-filter>
+			</activity>
+			
+			<!-- This is required for logging in -->
+			<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.NoDisplay" />
+			<activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@style/Theme.Transparent" />
+			
+			<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
+			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true" />
+			<activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
+			
+			<!-- This is required for app invite feature -->
+			<activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
+		</application>
+	</manifest>
+	]]></manifestAdditions>
   </android>
   <iPhone>
     <!--https://developer.apple.com/library/ios/documentation/general/reference/infoplistkeyreference/Articles/iPhoneOSKeys.html-->
     <!--http://help.adobe.com/en_US/air/build/WSfffb011ac560372f7e64a7f12cd2dd1867-8000.html-->
     <!-- A list of plist key/value pairs to be added to the application Info.plist -->
-    <InfoAdditions><![CDATA[<key>MinimumOSVersion</key>
-<string>6.1</string>
-<key>UIStatusBarStyle</key>
-<string>UIStatusBarStyleBlackOpaque</string>
-<key>UIRequiresPersistentWiFi</key>
-<string>NO</string>
-<key>UIFileSharingEnabled</key>
-<string>NO</string>
-<key>FacebookAppID</key>
-<string>000000000000000</string>
-<key>FacebookDisplayName</key>
-<string>Air Native Extension</string>
-<key>CFBundleURLTypes</key>
-<array>
-	<dict>
-		<key>CFBundleURLSchemes</key>
-		<array>
-			<string>fb000000000000000</string>
-			<string>air.com.doitflash.exfacebook2</string>
-		</array>
-	</dict>
-</array>
-<key>UIDeviceFamily</key>
-<array>
-	<string>1</string>
-	<string>2</string>
-</array>]]></InfoAdditions>
+    <InfoAdditions><![CDATA[
+	<key>MinimumOSVersion</key>
+	<string>6.1</string>
+	
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
+	
+	<key>UIRequiresPersistentWiFi</key>
+	<string>NO</string>
+	
+	<key>FacebookAppID</key>
+	<string>000000000000000</string>
+	
+	<key>FacebookDisplayName</key>
+	<string>Air Native Extension</string>
+	
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb000000000000000</string>
+				<string>air.com.doitflash.exfacebook2</string>
+			</array>
+		</dict>
+	</array>
+
+	<key>UIDeviceFamily</key>
+	<array>
+		<string>1</string>
+		<string>2</string>
+	</array>
+	
+	]]></InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>
   <initialWindow>
