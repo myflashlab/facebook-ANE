@@ -149,8 +149,8 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 ```
 
 # Requirements:
-1. you will need to add [commonDependenciesV4.0.ane](https://github.com/myflashlab/common-dependencies-ANE) to your project.
-2. Compile with Air SDK 18 or above.
+1. This ANE is dependent on **androidSupport.ane** and **overrideAir.ane** You need to add these ANEs to your project too. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
+2. Compile with Air SDK 19 or above.
 3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
   - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
   - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
