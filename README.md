@@ -136,6 +136,24 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 			</dict>
 		</array>
 		
+		<!-- To whitelist Facebook Apps -->
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>fbapi</string>
+			<string>fbapi20130214</string>
+			<string>fbapi20130410</string>
+			<string>fbapi20130702</string>
+			<string>fbapi20131010</string>
+			<string>fbapi20131219</string>    
+			<string>fbapi20140410</string>
+			<string>fbapi20140116</string>
+			<string>fbapi20150313</string>
+			<string>fbapi20150629</string>
+			<string>fbauth</string>
+			<string>fbauth2</string>
+			<string>fb-messenger-api20140430</string>
+		</array>
+		
 		<key>UIDeviceFamily</key>
 		<array>
 			<!-- iPhone support -->
@@ -166,8 +184,8 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 ![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
 
 # Tech Details
-* When compiling on Android, sometimes, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as explained below.
-* When compiling with commonDependenciesV4.0.ane you will notice that your project compile time will take longer than usual (specially if you are on a windows 32-bit). unfortunately this happens because V4.0 of our dependency ane is using the latest version of Google services and Adobe compiler takes just too much time to compile .apk! we are hoping that Adobe will fix this issue soon with the new Air SDK. we have already reported this on Adobe forums: https://forums.adobe.com/thread/1948895
+* When compiling on Android, sometimes, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as explained here https://forums.adobe.com/thread/1948895
+* If you are compiling with iOS SDK V9 i.e Adobe Air SDK 20.x.x you have to whitelist facebook app access. if you don't, Safari will open instead of the facebook app. If you are compiling with lower versions of Adobe Air SDK, this won't be a problem. To know how to whitelist Facebook in your app manifest, read the manifest setting above or read here for more information: http://www.myflashlabs.com/adobe-air-facebook-sdk-opens-in-safari-problem-in-ios-9
 
 # Tutorials
 [How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
