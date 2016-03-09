@@ -122,7 +122,8 @@
     <!--<image512x512>icons/icon_512.png</image512x512>-->
   </icon>
   <extensions>
-    <extensionID>com.doitflash.air.extensions.dependency</extensionID>
+    <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+    <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
     <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
   </extensions>
 </application>
