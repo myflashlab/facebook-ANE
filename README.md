@@ -176,7 +176,7 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
   - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
 4. Android SDK 11 or higher 
 5. iOS 6.1 or higher
-6. When compiling on Android, make sure you are always compiling in captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
+6. When compiling on Android, make sure you are always compiling in debug or captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
 
 # Commercial Version
 http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
