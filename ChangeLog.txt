@@ -1,5 +1,19 @@
 Facebook SDK Adobe Air Native Extension
 
+*May 16, 2016 - V4.11.0*
+* updated the core facebook SDK to [V4.11.0](https://developers.facebook.com/docs/android/change-log-4.x)
+* Support Android API 15 or higher
+* your app must be compiled with Air SDK 22 or higher
+* Added App Events support ```FB.logEvent(eventName, sum, params)```
+* Using Graph API v2.6
+* ```FB.logManager``` is now deprecated. you should use ```FB.auth``` instead
+* Updated the whitelist for facebook on iOS side of the manifest
+* From FB SDK 4.6 and higher, FB is forcing Safari View Controller (SVC) instead of fast-app-switching (FAS). It seems like a pain not to have the fast-app-switching anymore but Facebook says, this is actually a good thing! [Read here for more details](https://developers.facebook.com/blog/post/2015/10/29/Facebook-Login-iOS9/)
+* The iOS frameworks are updated to V4.11.0 **FB_SDK_FRAMEWORKS.zip**
+* Added ```event.graphRequest``` to ```FBEvent.GRAPH_RESPONSE``` and ```FBEvent.GRAPH_RESPONSE_ERROR``` so you will know what request to the graph you had sent previously
+* Some minor bug fixes
+
+
 *Jan 20, 2016 - V3.9.2*
 * bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
 

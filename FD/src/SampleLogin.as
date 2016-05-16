@@ -1,7 +1,7 @@
 package 
 {
 	import com.myflashlab.air.extensions.facebook.access.Permissions;
-	import com.myflashlab.air.extensions.facebook.access.LogManager;
+	import com.myflashlab.air.extensions.facebook.access.Auth;
 	import com.myflashlab.air.extensions.facebook.FB;
 	import com.myflashlab.air.extensions.facebook.FBEvent;
 	import com.doitflash.consts.Direction;
@@ -141,9 +141,6 @@ package
 		
 		private function init():void
 		{
-			// required only if you are a member of the club
-			FB.clubId = "paypal-address-you-used-to-join-the-club";
-			
 			// call this method only once in your app loading up
 			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
@@ -156,9 +153,9 @@ package
 			
 			function checkAccess(e:MouseEvent):void
 			{
-				C.log("token = " + FB.logManager.token);
-				C.log("permissions = " + FB.logManager.permissions);
-				C.log("declined Permissions = " + FB.logManager.declinedPermissions);
+				C.log("token = " + FB.auth.token);
+				C.log("permissions = " + FB.auth.permissions);
+				C.log("declined Permissions = " + FB.auth.declinedPermissions);
 			}
 			
 			// -------------------------
@@ -169,36 +166,36 @@ package
 			
 			function login(e:MouseEvent):void
 			{
-				FB.logManager.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-				FB.logManager.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-				FB.logManager.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-				FB.logManager.requestPermission(LogManager.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
-				//FB.logManager.requestPermission(LogManager.WITH_PUBLISH_PERMISSIONS, Permissions.publish_actions);
+				FB.auth.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+				FB.auth.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+				FB.auth.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+				FB.auth.requestPermission(Auth.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
+				//FB.auth.requestPermission(Auth.WITH_PUBLISH_PERMISSIONS, Permissions.publish_actions);
 			}
 			
 			function onLoginSuccess(event:FBEvent):void
 			{
-				FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+				FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+				FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+				FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
 				
 				C.log("onLoginSuccess");
 			}
 			
 			function onLoginCanceled(event:FBEvent):void
 			{
-				FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+				FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+				FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+				FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
 				
 				C.log("onLoginCanceled");
 			}
 			
 			function onLoginError(event:FBEvent):void
 			{
-				FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+				FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+				FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+				FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
 				
 				C.log("onLoginError = " + event.param);
 			}
@@ -211,7 +208,7 @@ package
 			
 			function logout(e:MouseEvent):void
 			{
-				FB.logManager.logout();
+				FB.auth.logout();
 			}
 		}
 		

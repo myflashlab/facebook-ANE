@@ -4,7 +4,7 @@ cd %~dp0 & cd ..
 :user_configuration
 
 :: Static path to Flex SDK
-set FLEX_SDK=C:\flex_sdk_4.6_air_sdk_20-204
+set FLEX_SDK=C:\flex_sdk_4.6_air_sdk_22-beta
 
 :: Use FD supplied SDK path if executed from FD
 if exist "%FD_CUR_SDK%" set FLEX_SDK=%FD_CUR_SDK%

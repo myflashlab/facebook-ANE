@@ -1,10 +1,11 @@
 package 
 {
 	import com.myflashlab.air.extensions.facebook.access.Permissions;
-	import com.myflashlab.air.extensions.facebook.access.LogManager;
+	import com.myflashlab.air.extensions.facebook.access.Auth;
 	import com.myflashlab.air.extensions.facebook.FB;
 	import com.myflashlab.air.extensions.facebook.FBEvent;
 	import com.myflashlab.air.extensions.facebook.LikeBtn;
+	import com.myflashlab.air.extensions.facebook.AppEventsConstants;
 	import com.myflashlab.air.extensions.facebook.sharing.ShareLink;
 	
 	import com.doitflash.consts.Direction;
@@ -159,9 +160,6 @@ package
 		
 		private function init():void
 		{
-			// required only if you are a member of the club
-			FB.clubId = "paypal-address-you-used-to-join-the-club";
-			
 			// App link: https://fb.me/477806509057618
 			FB.getInstance("00000000000");
 			trace("hash key = ", FB.hashKey);
@@ -172,26 +170,26 @@ package
 			
 			function toLogin(e:MouseEvent):void
 			{
-				if (FB.logManager.isLogin)
+				if (FB.auth.isLogin)
 				{
 					C.log("You are now logged out... Please hit the button again to login back!");
 					//toGraph();
-					FB.logManager.logout();
+					FB.auth.logout();
 				}
 				else
 				{
-					FB.logManager.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-					FB.logManager.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-					FB.logManager.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-					FB.logManager.requestPermission(LogManager.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
+					FB.auth.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+					FB.auth.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+					FB.auth.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+					FB.auth.requestPermission(Auth.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
 				}
 			}
 			
 			function onLoginSuccess(event:FBEvent):void
 			{
-				FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+				FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+				FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+				FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
 				
 				C.log("on Login Success... Now connecting to graph to download your profile picture!");
 				toGraph();
@@ -199,18 +197,18 @@ package
 			
 			function onLoginCanceled(event:FBEvent):void
 			{
-				FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+				FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+				FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+				FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
 				
 				C.log("on Login Canceled");
 			}
 			
 			function onLoginError(event:FBEvent):void
 			{
-				FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-				FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+				FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+				FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+				FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
 				
 				C.log("on Login Error = " + event.param);
 			}
@@ -239,6 +237,7 @@ package
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE, onGraphResponse);
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onGraphError);
 				
+				//C.log(event.graphRequest);
 				//C.log(event.param);
 				//C.log("----------------");
 				
@@ -253,6 +252,7 @@ package
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onGraphError);
 				
 				C.log("ERROR!");
+				C.log(event.graphRequest);
 				C.log(event.param);
 				C.log("----------------");
 				
@@ -263,11 +263,11 @@ package
 					obj = JSON.parse(event.param);
 					if (obj.error.type == "OAuthException")
 					{
-						FB.logManager.logout();
-						FB.logManager.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-						FB.logManager.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-						FB.logManager.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-						FB.logManager.requestPermission(LogManager.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
+						FB.auth.logout();
+						FB.auth.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+						FB.auth.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+						FB.auth.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+						FB.auth.requestPermission(Auth.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
 					}
 				}
 				catch (err:Error)
@@ -321,9 +321,17 @@ package
 				var shareModel:ShareLink = new ShareLink();
 				shareModel.contentTitle = "Cool ANEs in one basket!";
 				shareModel.contentURL = "http://myflashlabs.com";
-				shareModel.imageURL = "http://myflashlabs.com/myflashlab2.jpg";
+				shareModel.imageURL = "http://myflashlabs.com/myflashlab2.png";
 				shareModel.contentDescription = "This is a test description message to see how sharing works!";
 				FB.share(shareModel, onSharingResult);
+				
+				var logEventParams:Object = { };
+				logEventParams[AppEventsConstants.EVENT_PARAM_DESCRIPTION] = "sharing something!"; 
+				logEventParams[AppEventsConstants.EVENT_PARAM_CONTENT_TYPE] = "ShareLink"; 
+				//logEventParams[ CHOOSE ANY OTHER EVENT_PARAM_* ] = "value must be a string"; 
+				
+				FB.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, 1, logEventParams);
+				//FB.logEvent( CHOOSE ANY OTHER EVENT_NAME_* , 1, logEventParams);
 			}
 			
 			function onSharingResult($status:String, $msg:String):void
@@ -350,7 +358,12 @@ package
 			
 			function toLike(e:MouseEvent):void
 			{
-				if (like) like.dispose();
+				if (like) 
+				{
+					like.dispose();
+					like.removeEventListener(FBEvent.LIKE_BTN_CREATED, onBtnCreated);
+					like.removeEventListener(FBEvent.LIKE_BTN_ERROR, onBtnError);
+				}
 				
 				like = FB.createLikeBtn("https://www.facebook.com/myflashlab", LikeBtn.STYLE_STANDARD, LikeBtn.LINK_TYPE_PAGE, stage);
 				like.name = "myLikeBtn"
@@ -365,7 +378,7 @@ package
 			
 			function onBtnCreated(e:FBEvent):void
 			{
-				TweenMax.to(like, 4, {x:stage.stageWidth / 2 - like.width / 2, y:stage.stageHeight / 2 - like.height / 2});
+				TweenMax.to(like, 0.5, {x:stage.stageWidth / 2 - like.width / 2, y:stage.stageHeight / 2 - like.height / 2});
 			}
 			
 			// -------------------------
@@ -377,6 +390,7 @@ package
 			function toAppInvite(e:MouseEvent):void
 			{
 				// how to generate a unique app invite link: https://developers.facebook.com/quickstarts/?platform=app-links-host
+				// The suggested image size is 1,200 x 628 pixels with an image ratio 1.9:1.
 				C.log("app invite can show? " + FB.appInvite("https://fb.me/477806509057618", "http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg", onInviteResult));
 			}
 			

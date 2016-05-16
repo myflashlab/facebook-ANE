@@ -1,4 +1,4 @@
-# Facebook SDK ANE V3.9.2 (Android + iOS)
+# Facebook SDK ANE V4.11.0 (Android + iOS)
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe Air apps.
 
 Main features:
@@ -8,6 +8,7 @@ Main features:
 * Share URL links directly from your app
 * create Facebook like button and place it inside your Air app
 * send App Invite to friends
+* Support App Events for use in Facebook analytics
 * full access to Facebook Graph API... the sky is the limit!
 * works on Android and iOS with an identical AS3 library
 
@@ -20,46 +21,45 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 # Air Usage
 ###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/FD/src)
 ```actionscript
-     FB.getInstance("000000000000000"); // facebook app ID you received from your Facebook API console
-     trace("hash key = ", FB.hashKey); // required once for Android only
+FB.getInstance("000000000000000"); // facebook app ID you received from your Facebook API console
+trace("hash key = ", FB.hashKey); // required once for Android only
 
-     FB.logManager.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-     FB.logManager.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-     FB.logManager.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-     
-     // an array of permissions. you can add or remove items from this array anytime you like
-     FB.logManager.requestPermission(LogManager.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
-     
-     function onLoginSuccess(event:FBEvent):void
-     {
-         FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-         FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-         FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-         
-         trace("onLoginSuccess");
-         trace("token = " + FB.logManager.token);
-         trace("permissions = " + FB.logManager.permissions);
-         trace("declined Permissions = " + FB.logManager.declinedPermissions);
-     }
-     
-     function onLoginCanceled(event:FBEvent):void
-     {
-         FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-         FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-         FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-         
-         trace("onLoginCanceled");
-     }
-     
-     function onLoginError(event:FBEvent):void
-     {
-         FB.logManager.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-         FB.logManager.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-         FB.logManager.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-         
-         trace("onLoginError = " + event.param);
-     }
-     
+FB.auth.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+FB.auth.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+FB.auth.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+
+// an array of permissions. you can add or remove items from this array anytime you like
+FB.auth.requestPermission(Auth.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
+
+function onLoginSuccess(event:FBEvent):void
+{
+	FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+	FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+	FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+	
+	trace("onLoginSuccess");
+	trace("token = " + FB.auth.token);
+	trace("permissions = " + FB.auth.permissions);
+	trace("declined Permissions = " + FB.auth.declinedPermissions);
+}
+
+function onLoginCanceled(event:FBEvent):void
+{
+	FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+	FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+	FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+	
+	trace("onLoginCanceled");
+}
+
+function onLoginError(event:FBEvent):void
+{
+	FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
+	FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
+	FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+
+	trace("onLoginError = " + event.param);
+}
 ```
 
 # Air .xml manifest
@@ -80,6 +80,8 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 					<action android:name="android.intent.action.VIEW" />
 					<category android:name="android.intent.category.BROWSABLE" />
 					<category android:name="android.intent.category.DEFAULT" />
+					
+					<!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
 					<data android:scheme="air.com.doitflash.exfacebook2" />
 				</intent-filter>
 			</activity>
@@ -105,19 +107,13 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
     <!-- A list of plist key/value pairs to be added to the application Info.plist -->
     <InfoAdditions>
 		<![CDATA[<key>MinimumOSVersion</key>
-		<string>6.1</string>
+		<string>7.1</string>
 		
 		<key>UIStatusBarStyle</key>
 		<string>UIStatusBarStyleBlackOpaque</string>
 		
 		<key>UIRequiresPersistentWiFi</key>
 		<string>NO</string>
-		
-		<key>UIFileSharingEnabled</key>
-		<string>NO</string>
-		
-		<key>UIPrerenderedIcon</key>
-		<true />
 		
 		<key>FacebookAppID</key>
 		<string>000000000000000</string>
@@ -136,22 +132,43 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 			</dict>
 		</array>
 		
-		<!-- To whitelist Facebook Apps -->
+		<!-- To whitelist Facebook Apps and domains 
+		https://developers.facebook.com/docs/ios/getting-started/  -->
+		
+		<key>NSAppTransportSecurity</key>
+		<dict>
+		  <key>NSExceptionDomains</key>
+		  <dict>
+			<key>facebook.com</key>
+			<dict>
+			  <key>NSIncludesSubdomains</key>
+			  <true/>
+			  <key>NSExceptionRequiresForwardSecrecy</key>
+			  <false/>
+			</dict>
+			<key>fbcdn.net</key>
+			<dict>
+			  <key>NSIncludesSubdomains</key>
+			  <true/>
+			  <key>NSExceptionRequiresForwardSecrecy</key>
+			  <false/>
+			</dict>
+			<key>akamaihd.net</key>
+			<dict>
+			  <key>NSIncludesSubdomains</key>
+			  <true/>
+			  <key>NSExceptionRequiresForwardSecrecy</key>
+			  <false/>
+			</dict>
+		  </dict>
+		</dict>
+
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
 			<string>fbapi</string>
-			<string>fbapi20130214</string>
-			<string>fbapi20130410</string>
-			<string>fbapi20130702</string>
-			<string>fbapi20131010</string>
-			<string>fbapi20131219</string>    
-			<string>fbapi20140410</string>
-			<string>fbapi20140116</string>
-			<string>fbapi20150313</string>
-			<string>fbapi20150629</string>
-			<string>fbauth</string>
+			<string>fb-messenger-api</string>
 			<string>fbauth2</string>
-			<string>fb-messenger-api20140430</string>
+			<string>fbshareextension</string>
 		</array>
 		
 		<key>UIDeviceFamily</key>
@@ -164,18 +181,26 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 		
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>
+  
+  
+  
+  <extensions>
+    <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+    <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+    <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
+  </extensions>
 ```
 
 # Requirements:
 1. This ANE is dependent on **androidSupport.ane** and **overrideAir.ane** You need to add these ANEs to your project too. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
-2. Compile with Air SDK 19 or above.
+2. Compile with Air SDK 22 or above.
 3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
   - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
   - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
   - when in your Air SDK, go to "\lib\aot\stub". here you will find all the iOS frameworks provided by Air SDK by default.
   - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
-4. Android SDK 11 or higher 
-5. iOS 6.1 or higher
+4. Android SDK 15 or higher 
+5. iOS 7.1 or higher
 6. When compiling on Android, make sure you are always compiling in debug or captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
 
 # Commercial Version
@@ -184,8 +209,8 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 ![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
 
 # Tech Details
-* When compiling on Android, sometimes, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as explained here https://forums.adobe.com/thread/1948895
-* If you are compiling with iOS SDK V9 i.e Adobe Air SDK 20.x.x you have to whitelist facebook app access. if you don't, Safari will open instead of the facebook app. If you are compiling with lower versions of Adobe Air SDK, this won't be a problem. To know how to whitelist Facebook in your app manifest, read the manifest setting above or read here for more information: http://www.myflashlabs.com/adobe-air-facebook-sdk-opens-in-safari-problem-in-ios-9
+* When compiling on Android, rarely, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as [explained here](https://forums.adobe.com/thread/1948895)
+* From V4.11.0 of this ANE, Facebook is forcing Safari View Controller (SVC) instead of fast-app-switching (FAS) for the iOS side. [Read the official blog about this](https://developers.facebook.com/blog/post/2015/10/29/Facebook-Login-iOS9/)
 
 # Tutorials
 [How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
@@ -200,6 +225,20 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)  
 
 # Changelog
+*May 16, 2016 - V4.11.0*
+* updated the core facebook SDK to [V4.11.0](https://developers.facebook.com/docs/android/change-log-4.x)
+* Support Android API 15 or higher
+* your app must be compiled with Air SDK 22 or higher
+* Added App Events support ```FB.logEvent(eventName, sum, params)```
+* Using Graph API v2.6
+* ```FB.logManager``` is now deprecated. you should use ```FB.auth``` instead
+* Updated the whitelist for facebook on iOS side of the manifest
+* From FB SDK 4.6 and higher, FB is forcing Safari View Controller (SVC) instead of fast-app-switching (FAS). It seems like a pain not to have the fast-app-switching anymore but Facebook says, this is actually a good thing! [Read here for more details](https://developers.facebook.com/blog/post/2015/10/29/Facebook-Login-iOS9/)
+* The iOS frameworks are updated to V4.11.0 **FB_SDK_FRAMEWORKS.zip**
+* Added ```event.graphRequest``` to ```FBEvent.GRAPH_RESPONSE``` and ```FBEvent.GRAPH_RESPONSE_ERROR``` so you will know what request to the graph you had sent previously
+* Some minor bug fixes
+
+
 *Jan 20, 2016 - V3.9.2*
 * bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
 

@@ -140,9 +140,6 @@ package
 		
 		private function init():void
 		{
-			// required only if you are a member of the club
-			FB.clubId = "paypal-address-you-used-to-join-the-club";
-			
 			FB.getInstance("000000000000000");
 			trace("hash key = ", FB.hashKey);
 			
@@ -178,6 +175,7 @@ package
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE, onResponse);
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onError);
 				
+				C.log(event.graphRequest);
 				C.log(event.param);
 				C.log("----------------");
 			}
@@ -188,6 +186,7 @@ package
 				FB.graph.removeEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onError);
 				
 				C.log("ERROR!");
+				C.log(event.graphRequest);
 				C.log(event.param);
 				C.log("----------------");
 			}
