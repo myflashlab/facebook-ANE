@@ -206,7 +206,7 @@ function onLoginError(event:FBEvent):void
 # Commercial Version
 http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 
-![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
+![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-1-595x738.jpg)
 
 # Tech Details
 * When compiling on Android, rarely, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as [explained here](https://forums.adobe.com/thread/1948895)
