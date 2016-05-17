@@ -12,6 +12,9 @@ Main features:
 * full access to Facebook Graph API... the sky is the limit!
 * works on Android and iOS with an identical AS3 library
 
+# asdoc
+[find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/package-detail.html)
+
 # Demo .apk
 you may like to see the ANE in action? [Download demo .apk](https://github.com/myflashlab/facebook-ANE/tree/master/FD/dist)
 
