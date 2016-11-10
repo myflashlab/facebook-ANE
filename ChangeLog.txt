@@ -1,5 +1,28 @@
 Facebook SDK Adobe Air Native Extension
 
+*Nov 10, 2016 - V4.17.0*
+* Optimized for manual permissions required by AIR SDK 24+
+* Min AIR SDK 24 to compile this ANE with swf-version set to 35
+* updated the core facebook SDK to V4.17.0 - Make sure to update your current [Facebook frameworks for iOS](https://github.com/myflashlab/facebook-ANE/blob/master/FB_SDK_FRAMEWORKS.zip)
+* Min iOS to support this version is 8.0
+* Login activity has changed to:
+```xml
+<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.NoDisplay" />
+```
+* You no longer need to whitelist Facebook domains.
+* Add Usage Description for PhotoLibrary by the Facebook SDK
+```xml
+<key>NSPhotoLibraryUsageDescription</key>
+<string>My description about why I need this feature in my app</string>
+```
+* Make sure to [update the common dependencies](https://github.com/myflashlab/common-dependencies-ANE): **overrideAir** and **androidSupport** to the latest version
+* The ```FB.graph.request()``` method and the ```FB.graph.version``` property is now depricated. Instead use the ```FB.graph.call()``` method and pass in the graph version directly:
+```actionscript
+FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE, onGraphResponse);
+FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onGraphError);
+FB.graph.call("https://graph.facebook.com/v2.8/me", URLRequestMethod.GET, new URLVariables("fields=name,email,picture&metadata=0"));
+```
+
 *May 16, 2016 - V4.11.0*
 * updated the core facebook SDK to [V4.11.0](https://developers.facebook.com/docs/android/change-log-4.x)
 * Support Android API 15 or higher

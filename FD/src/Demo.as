@@ -37,10 +37,13 @@ package
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
 	import com.greensock.TweenMax;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
 	
 	/**
 	 * 
 	 * @author Hadi Tavakoli - 7/31/2015 3:33 PM
+	 * 							10/31/2016 3:40 PM
 	 */
 	public class Demo extends Sprite 
 	{
@@ -106,8 +109,8 @@ package
 		
 		private function onInvoke(e:InvokeEvent):void
 		{
-			C.log("onInvoke = " + e.arguments);
-			NativeApplication.nativeApplication.removeEventListener(InvokeEvent.INVOKE, onInvoke);
+			//C.log("onInvoke = " + e.arguments);
+			//NativeApplication.nativeApplication.removeEventListener(InvokeEvent.INVOKE, onInvoke);
 		}
 		
 		private function handleActivate(e:Event):void 
@@ -162,7 +165,7 @@ package
 		{
 			// App link: https://fb.me/477806509057618
 			FB.getInstance("00000000000");
-			trace("hash key = ", FB.hashKey);
+			if(FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey);
 			
 			var btn1:MySprite = createBtn("Test Login and Graph");
 			btn1.addEventListener(MouseEvent.CLICK, toLogin);
@@ -182,6 +185,7 @@ package
 					FB.auth.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
 					FB.auth.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
 					FB.auth.requestPermission(Auth.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
+					C.log("Please wait...");
 				}
 			}
 			
@@ -229,7 +233,7 @@ package
 				
 				FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE, onGraphResponse);
 				FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onGraphError);
-				FB.graph.request("/me?fields=name,email,picture&metadata=0");
+				FB.graph.call("https://graph.facebook.com/v2.8/me", URLRequestMethod.GET, new URLVariables("fields=name,email,picture&metadata=0"));
 			}
 			
 			function onGraphResponse(event:FBEvent):void
@@ -243,7 +247,39 @@ package
 				
 				_user = JSON.parse(event.param);
 				
+				
+				
+				// save some event logs for analytics reasons
+				// 
+				// NOTICE: If you really need to generate logs in your app, we stringly 
+				// recommend you to have a look at the Firebase Analytics ANE:
+				// http://www.myflashlabs.com/product/analytics-firebase-air-native-extension/
+				if (_user.email) 
+				{
+					// The following two APIs are still in experimental and will work on the iOS side only at the moment
+					FB.setUserId(_user.email);
+					FB.updateUserProperties({name:_user.name}, onUpdateUserPropertiesResult);
+				}
+				
+				
+				
+				
 				toLoadProfilePic();
+			}
+			
+			function onUpdateUserPropertiesResult($status:String, $msg:String):void
+			{
+				/*
+				
+				$status will be one of the following:
+					FBEvent.UPDATE_USER_PROPERTIES_SUCCESS
+					FBEvent.UPDATE_USER_PROPERTIES_ERROR
+					
+				if it is "FBEvent.UPDATE_USER_PROPERTIES_ERROR", then $msg will explain the error reason
+				
+				*/
+				
+				C.log("onUpdateUserPropertiesResult = " + $status);
 			}
 			
 			function onGraphError(event:FBEvent):void
@@ -347,7 +383,7 @@ package
 				
 				*/
 				
-				C.log($status);
+				C.log("onSharingResult = " + $status);
 			}
 			
 			// -------------------------
@@ -407,7 +443,7 @@ package
 				
 				*/
 				
-				C.log($status);
+				C.log("onInviteResult = " + $status);
 			}
 			
 			// -------------------------

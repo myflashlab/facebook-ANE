@@ -1,12 +1,12 @@
-# Facebook SDK ANE V4.11.0 (Android + iOS)
-This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe Air apps.
+# Facebook SDK ANE V4.17.0 (Android + iOS)
+This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe AIR apps.
 
 Main features:
 * Login/logout
 * ask users for permissions
 * decide on your app logic based on granted permissions
 * Share URL links directly from your app
-* create Facebook like button and place it inside your Air app
+* create Facebook like button and place it inside your AIR app
 * send App Invite to friends
 * Support App Events for use in Facebook analytics
 * full access to Facebook Graph API... the sky is the limit!
@@ -21,11 +21,11 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 **NOTICE**: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.
 [Download the ANE](https://github.com/myflashlab/facebook-ANE/tree/master/FD/lib)
 
-# Air Usage
+# AIR Usage
 ###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/FD/src)
 ```actionscript
 FB.getInstance("000000000000000"); // facebook app ID you received from your Facebook API console
-trace("hash key = ", FB.hashKey); // required once for Android only
+if(FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey); // required once for Android only
 
 FB.auth.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
 FB.auth.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
@@ -65,7 +65,7 @@ function onLoginError(event:FBEvent):void
 }
 ```
 
-# Air .xml manifest
+# AIR .xml manifest
 ```xml
   <android>
     <manifestAdditions>
@@ -92,8 +92,8 @@ function onLoginError(event:FBEvent):void
 			
 			
 			<!-- This is required for logging in -->
-			<activity android:name="com.facebook.FacebookActivity" 			android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" 	android:theme="@style/Theme.Transparent" />
-			<activity android:name="com.doitflash.facebook.access.MyLogin" 	android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"	android:theme="@style/Theme.Transparent" />
+			<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+			<activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@style/Theme.Transparent" />
 			
 			<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
 			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
@@ -110,7 +110,7 @@ function onLoginError(event:FBEvent):void
     <!-- A list of plist key/value pairs to be added to the application Info.plist -->
     <InfoAdditions>
 		<![CDATA[<key>MinimumOSVersion</key>
-		<string>7.1</string>
+		<string>8.0</string>
 		
 		<key>UIStatusBarStyle</key>
 		<string>UIStatusBarStyleBlackOpaque</string>
@@ -130,41 +130,12 @@ function onLoginError(event:FBEvent):void
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>fb000000000000000</string>
+					
+					<!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
 					<string>air.com.doitflash.exfacebook2</string>
 				</array>
 			</dict>
 		</array>
-		
-		<!-- To whitelist Facebook Apps and domains 
-		https://developers.facebook.com/docs/ios/getting-started/  -->
-		
-		<key>NSAppTransportSecurity</key>
-		<dict>
-		  <key>NSExceptionDomains</key>
-		  <dict>
-			<key>facebook.com</key>
-			<dict>
-			  <key>NSIncludesSubdomains</key>
-			  <true/>
-			  <key>NSExceptionRequiresForwardSecrecy</key>
-			  <false/>
-			</dict>
-			<key>fbcdn.net</key>
-			<dict>
-			  <key>NSIncludesSubdomains</key>
-			  <true/>
-			  <key>NSExceptionRequiresForwardSecrecy</key>
-			  <false/>
-			</dict>
-			<key>akamaihd.net</key>
-			<dict>
-			  <key>NSIncludesSubdomains</key>
-			  <true/>
-			  <key>NSExceptionRequiresForwardSecrecy</key>
-			  <false/>
-			</dict>
-		  </dict>
-		</dict>
 
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
@@ -173,6 +144,9 @@ function onLoginError(event:FBEvent):void
 			<string>fbauth2</string>
 			<string>fbshareextension</string>
 		</array>
+			
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>My description about why I need this feature in my app</string>
 		
 		<key>UIDeviceFamily</key>
 		<array>
@@ -188,22 +162,25 @@ function onLoginError(event:FBEvent):void
   
   
   <extensions>
+  
+	<!-- The following dependency ANEs are only required when compiling for Android -->
     <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
     <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+	
     <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
   </extensions>
 ```
 
 # Requirements:
 1. This ANE is dependent on **androidSupport.ane** and **overrideAir.ane** You need to add these ANEs to your project too. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
-2. Compile with Air SDK 22 or above.
+2. Compile with Air SDK 24 or above.
 3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
   - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
   - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
   - when in your Air SDK, go to "\lib\aot\stub". here you will find all the iOS frameworks provided by Air SDK by default.
   - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
 4. Android SDK 15 or higher 
-5. iOS 7.1 or higher
+5. iOS 8.0 or higher
 6. When compiling on Android, make sure you are always compiling in debug or captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
 
 # Commercial Version
@@ -228,6 +205,29 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)  
 
 # Changelog
+*Nov 10, 2016 - V4.17.0*
+* Optimized for manual permissions required by AIR SDK 24+
+* Min AIR SDK 24 to compile this ANE with swf-version set to 35
+* updated the core facebook SDK to V4.17.0 - Make sure to update your current [Facebook frameworks for iOS](https://github.com/myflashlab/facebook-ANE/blob/master/FB_SDK_FRAMEWORKS.zip)
+* Min iOS to support this version is 8.0
+* Login activity has changed to:
+```xml
+<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.NoDisplay" />
+```
+* You no longer need to whitelist Facebook domains.
+* Add Usage Description for PhotoLibrary by the Facebook SDK
+```xml
+<key>NSPhotoLibraryUsageDescription</key>
+<string>My description about why I need this feature in my app</string>
+```
+* Make sure to [update the common dependencies](https://github.com/myflashlab/common-dependencies-ANE): **overrideAir** and **androidSupport** to the latest version
+* The ```FB.graph.request()``` method and the ```FB.graph.version``` property is now depricated. Instead use the ```FB.graph.call()``` method and pass in the graph version directly:
+```actionscript
+FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE, onGraphResponse);
+FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onGraphError);
+FB.graph.call("https://graph.facebook.com/v2.8/me", URLRequestMethod.GET, new URLVariables("fields=name,email,picture&metadata=0"));
+```
+
 *May 16, 2016 - V4.11.0*
 * updated the core facebook SDK to [V4.11.0](https://developers.facebook.com/docs/android/change-log-4.x)
 * Support Android API 15 or higher

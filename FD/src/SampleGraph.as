@@ -26,6 +26,8 @@ package
 	import flash.ui.Keyboard;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
 	
 	/**
 	 * 
@@ -122,7 +124,7 @@ package
 				C.x = 0;
 				C.y = _txt.y + _txt.height + 0;
 				C.width = stage.stageWidth * (1 / DeviceInfo.dpiScaleMultiplier);
-				C.height = 300 * (1 / DeviceInfo.dpiScaleMultiplier);
+				C.height = 500 * (1 / DeviceInfo.dpiScaleMultiplier);
 			}
 			
 			if (_list)
@@ -167,7 +169,9 @@ package
 				// https://developers.facebook.com/docs/graph-api/reference
 				FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE, onResponse);
 				FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onError);
-				FB.graph.request(txt.text);
+				
+				var arr:Array = txt.text.split("?");
+				FB.graph.call("https://graph.facebook.com/v2.8"+arr[0], URLRequestMethod.GET, new URLVariables(arr[1]));
 			}
 			
 			function onResponse(event:FBEvent):void
