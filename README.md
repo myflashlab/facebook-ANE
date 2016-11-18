@@ -212,7 +212,7 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 * Min iOS to support this version is 8.0
 * Login activity has changed to:
 ```xml
-<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.NoDisplay" />
+<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 ```
 * You no longer need to whitelist Facebook domains.
 * Add Usage Description for PhotoLibrary by the Facebook SDK
