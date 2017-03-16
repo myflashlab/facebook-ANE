@@ -206,8 +206,7 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 
 # Changelog
 *Mar 17, 2017 - V4.17.1*
-Updated the ANE with OverrideAIR V4.0.0 From now on, this ANE will also be needed for the iOS side too.
-
+* Updated the ANE with OverrideAIR V4.0.0 From now on, this ANE will also be needed for the iOS side too.
 
 *Nov 10, 2016 - V4.17.0*
 * Optimized for manual permissions required by AIR SDK 24+
