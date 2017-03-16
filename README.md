@@ -163,11 +163,11 @@ function onLoginError(event:FBEvent):void
   
   <extensions>
   
-	<!-- The following dependency ANEs are only required when compiling for Android -->
-    <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
-    <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+	<!-- download the dependency ANEs from https://github.com/myflashlab/common-dependencies-ANE -->
+	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
 	
-    <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
+	<extensionID>com.myflashlab.air.extensions.facebook</extensionID>
   </extensions>
 ```
 

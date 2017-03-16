@@ -130,7 +130,7 @@
   </icon>
   <extensions>
 	
-	<!-- The following dependency ANEs are only required when compiling for Android -->
+	<!-- download the dependency ANEs from https://github.com/myflashlab/common-dependencies-ANE -->
     <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
     <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
 	
