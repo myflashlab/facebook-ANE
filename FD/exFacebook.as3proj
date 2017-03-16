@@ -8,7 +8,7 @@
     <movie fps="30" />
     <movie width="480" />
     <movie height="762" />
-    <movie version="21" />
+    <movie version="23" />
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />
     <movie background="#FFFFFF" />
@@ -58,6 +58,7 @@
     <element path="lib\barcodeExtension.ane" />
     <element path="lib\downloadManager.ane" />
     <element path="lib\facebook.ane" />
+    <element path="lib\overrideAir.ane" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

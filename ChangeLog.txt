@@ -1,5 +1,8 @@
 Facebook SDK Adobe Air Native Extension
 
+*Mar 17, 2017 - V4.17.1*
+Updated the ANE with OverrideAIR V4.0.0 From now on, this ANE will also be needed for the iOS side too.
+
 *Nov 10, 2016 - V4.17.0*
 * Optimized for manual permissions required by AIR SDK 24+
 * Min AIR SDK 24 to compile this ANE with swf-version set to 35

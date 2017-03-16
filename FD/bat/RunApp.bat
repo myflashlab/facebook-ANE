@@ -9,9 +9,9 @@ call bat\SetupApp.bat
 
 :target
 ::goto desktop
-::goto android-debug
+goto android-debug
 ::goto android-test
-goto android-captive
+::goto android-captive
 set INTERPRETER=-interpreter
 ::goto ios-debug
 ::goto ios-test

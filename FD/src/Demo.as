@@ -7,6 +7,7 @@ package
 	import com.myflashlab.air.extensions.facebook.LikeBtn;
 	import com.myflashlab.air.extensions.facebook.AppEventsConstants;
 	import com.myflashlab.air.extensions.facebook.sharing.ShareLink;
+	import com.myflashlab.air.extensions.dependency.OverrideAir;
 	
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
@@ -161,8 +162,20 @@ package
 			}
 		}
 		
+		private function myDebuggerDelegate($ane:String, $class:String, $msg:String):void
+		{
+			trace("------------------");
+			trace("$ane = " + $ane);
+			trace("$class = " + $class);
+			trace("$msg = " + $msg);
+			trace("------------------");
+		}
+		
 		private function init():void
 		{
+			// remove this line in production build or pass null as the delegate
+			OverrideAir.enableDebugger(myDebuggerDelegate);
+			
 			// App link: https://fb.me/477806509057618
 			FB.getInstance("00000000000");
 			if(FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey);
