@@ -1,4 +1,4 @@
-# Facebook SDK ANE V4.17.1 (Android + iOS)
+# Facebook SDK ANE V4.22.1 (Android + iOS)
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe AIR apps.
 
 Main features:
@@ -73,6 +73,8 @@ function onLoginError(event:FBEvent):void
 		<uses-permission android:name="android.permission.WAKE_LOCK" />
 		<uses-permission android:name="android.permission.INTERNET" />
 		
+		<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="23"/>
+		
 		<application android:hardwareAccelerated="true" android:allowBackup="true">
 			<activity android:hardwareAccelerated="false">
 				<intent-filter>
@@ -91,9 +93,29 @@ function onLoginError(event:FBEvent):void
 			
 			
 			
-			<!-- This is required for logging in -->
-			<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-			<activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@style/Theme.Transparent" />
+			<!-- 
+				This is required by the Facebook ANE. replace the zeros with your actual Facebook App ID
+				While doing that, notice the empty space after the "\ ". This is required because the ANE 
+				must see the value as an String.
+			-->
+			<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="\ 000000000000000"/>
+			
+			<!-- This is required by the Facebook ANE for logging in -->
+			<activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="My App Name" />
+			<activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@style/Theme.Transparent" />
+			
+			<activity android:name="com.facebook.CustomTabMainActivity" />
+			<activity
+				android:name="com.facebook.CustomTabActivity"
+				android:exported="true">
+				<intent-filter>
+					<action android:name="android.intent.action.VIEW" />
+					<category android:name="android.intent.category.DEFAULT" />
+					<category android:name="android.intent.category.BROWSABLE" />
+					<data android:scheme="fb000000000000000" />
+				</intent-filter>
+			</activity>
+			
 			
 			<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
 			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
@@ -163,17 +185,22 @@ function onLoginError(event:FBEvent):void
   
   <extensions>
   
-	<!-- download the dependency ANEs from https://github.com/myflashlab/common-dependencies-ANE -->
-	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
-	
 	<extensionID>com.myflashlab.air.extensions.facebook</extensionID>
+	
+	<!-- The following dependency ANEs are required Download from https://github.com/myflashlab/common-dependencies-ANE -->
+	
+	<!-- This dependency is needed on Android and iOS -->
+    <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+	
+	<!-- This dependency is needed on Android ONLY. You may need to comment it out if necessary -->
+    <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+	
   </extensions>
 ```
 
 # Requirements:
 1. This ANE is dependent on **androidSupport.ane** and **overrideAir.ane** You need to add these ANEs to your project too. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
-2. Compile with Air SDK 24 or above.
+2. Compile with Air SDK 25 or above.
 3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
   - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
   - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
@@ -189,8 +216,8 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 ![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-1-595x738.jpg)
 
 # Tech Details
-* When compiling on Android, rarely, randomly you may see a compilation error! Just try again and it will be fine. It's a bug on Adobe's side as [explained here](https://forums.adobe.com/thread/1948895)
-* From V4.11.0 of this ANE, Facebook is forcing Safari View Controller (SVC) instead of fast-app-switching (FAS) for the iOS side. [Read the official blog about this](https://developers.facebook.com/blog/post/2015/10/29/Facebook-Login-iOS9/)
+* If Facebook official app is not installed, a chrome tab on Android and Safari ViewController on iOS will be opened. To make sure that works, you need to have added the ```CustomTabActivity``` and ```CustomTabMainActivity``` activities to your manifest.
+* When building on iOS, if you are seeing compilation errors like ```Installation Error: PackageExtractionFailed.```, check if the ```androidSupport.ane``` is present. If it is, remove it. It's only needed on the Android side anyway.
 
 # Tutorials
 [How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
@@ -205,6 +232,38 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)  
 
 # Changelog
+*May 16, 2017 - V4.22.1*
+* updated the core facebook SDK to V4.22.1
+* The ```FB.graph.request``` method along with the ```FB.graph.version``` property is removed. these were deprecated in the last release and are now removed. instead you have to use the [FB.graph.call](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/access/Graph.html#call()) method to access the graph.
+* new methods introduced: [FB.setUserId](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#setUserId()), [FB.clearUserId](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#clearUserId()) and  [FB.updateUserProperties](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#updateUserProperties())
+* When using sharing a URL with ```FB.share(shareModel, onSharingResult);```, the shareModel object can only have the [contentURL](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/sharing/ShareLink.html#contentURL) property. Other properties are deprecated: (```contentDescription```, ```contentTitle``` and ```imageURL```)
+* You need to update your dependency files ```androidSupport.ane``` (required on Android ONLY) and ```overrideAir.ane``` (required on iOS+Android).
+* Min Air SDK is 25+
+* Min Android SDK is 15+
+* Min iOS SDK is 8+
+* You need to add the following changes to your manifest .xml file:
+  * Add ```<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="\ {FB_APP_ID}"/>```. **Notice the space after the ```\```**
+  * change two activities to following while replacing ```My App Name``` with your own app name. 
+  ```xml
+  <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="My App Name" />
+  <activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@style/Theme.Transparent" />
+  ``` 
+  * Add these activities while changing {FB_APP_ID} to your own Facebook App ID.
+  ```xml
+  <activity android:name="com.facebook.CustomTabMainActivity" />
+  <activity
+	  android:name="com.facebook.CustomTabActivity"
+	  android:exported="true">
+	  <intent-filter>
+		  <action android:name="android.intent.action.VIEW" />
+		  <category android:name="android.intent.category.DEFAULT" />
+		  <category android:name="android.intent.category.BROWSABLE" />
+		  <data android:scheme="fb{FB_APP_ID}" />
+	  </intent-filter>
+  </activity>
+  ```
+  * Don't forget to include other manifest settings. Above, we only mentioned what is changed.
+
 *Mar 17, 2017 - V4.17.1*
 * Updated the ANE with OverrideAIR V4.0.0 From now on, this ANE will also be needed for the iOS side too.
 
