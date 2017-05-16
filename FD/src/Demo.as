@@ -178,7 +178,16 @@ package
 			
 			// App link: https://fb.me/477806509057618
 			FB.getInstance("00000000000");
-			if(FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey);
+			if (FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey);
+			
+			var btn0:MySprite = createBtn("is login?");
+			btn0.addEventListener(MouseEvent.CLICK, isLogin);
+			_list.add(btn0);
+			
+			function isLogin(e:MouseEvent):void
+			{
+				C.log("isLogin = " + FB.auth.isLogin)
+			}
 			
 			var btn1:MySprite = createBtn("Test Login and Graph");
 			btn1.addEventListener(MouseEvent.CLICK, toLogin);
@@ -269,7 +278,6 @@ package
 				// http://www.myflashlabs.com/product/analytics-firebase-air-native-extension/
 				if (_user.email) 
 				{
-					// The following two APIs are still in experimental and will work on the iOS side only at the moment
 					FB.setUserId(_user.email);
 					FB.updateUserProperties({name:_user.name}, onUpdateUserPropertiesResult);
 				}
@@ -368,10 +376,7 @@ package
 			function toShare(e:MouseEvent):void
 			{
 				var shareModel:ShareLink = new ShareLink();
-				shareModel.contentTitle = "Cool ANEs in one basket!";
 				shareModel.contentURL = "http://myflashlabs.com";
-				shareModel.imageURL = "http://myflashlabs.com/myflashlab2.png";
-				shareModel.contentDescription = "This is a test description message to see how sharing works!";
 				FB.share(shareModel, onSharingResult);
 				
 				var logEventParams:Object = { };
