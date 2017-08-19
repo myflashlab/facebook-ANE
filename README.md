@@ -1,4 +1,4 @@
-# Facebook SDK ANE V4.22.1 (Android + iOS)
+# Facebook SDK ANE V4.22.2 (Android + iOS)
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe AIR apps.
 
 Main features:
@@ -232,6 +232,10 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)  
 
 # Changelog
+*Aug 19, 2017 - V4.22.2*
+* Fixed bug #90
+* Added IntelliJ demo
+
 *May 16, 2017 - V4.22.1*
 * updated the core facebook SDK to V4.22.1
 * The ```FB.graph.request``` method along with the ```FB.graph.version``` property is removed. these were deprecated in the last release and are now removed. instead you have to use the [FB.graph.call](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/access/Graph.html#call()) method to access the graph.

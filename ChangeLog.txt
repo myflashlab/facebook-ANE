@@ -1,5 +1,9 @@
 Facebook SDK Adobe Air Native Extension
 
+*Aug 19, 2017 - V4.22.2*
+* Fixed bug #90
+* Added IntelliJ demo
+
 *May 16, 2017 - V4.22.1*
 * updated the core facebook SDK to V4.22.1
 * The ```FB.graph.request``` method along with the ```FB.graph.version``` property is removed. these were deprecated in the last release and are now removed. instead you have to use the [FB.graph.call](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/access/Graph.html#call()) method to access the graph.

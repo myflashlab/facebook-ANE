@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/25.0">
   <id>com.doitflash.exFacebook2</id>
-  <versionNumber>4.22.1</versionNumber>
+  <versionNumber>4.22.2</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exFacebook</filename>
   <name>FB ANE</name>
