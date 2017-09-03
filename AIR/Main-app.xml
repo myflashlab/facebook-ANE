@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/26.0">
     <id>com.doitflash.exFacebook2</id>
-    <versionNumber>4.22.2</versionNumber>
+    <versionNumber>4.22.3</versionNumber>
     <supportedProfiles>mobileDevice</supportedProfiles>
     <filename>exFacebook</filename>
     <name>FB ANE</name>
@@ -17,52 +17,62 @@
             <application android:hardwareAccelerated="true" android:allowBackup="true">
             
             <activity android:hardwareAccelerated="false">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <category android:name="android.intent.category.DEFAULT" />
             
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            
-            <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <category android:name="android.intent.category.DEFAULT" />
-            
-            <!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
-            <data android:scheme="air.com.doitflash.exfacebook2" />
-            </intent-filter>
-            
+                    <!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
+                    <data android:scheme="air.com.doitflash.exfacebook2" />
+                    </intent-filter>
             </activity>
             
             <!--
-            This is required by the Facebook ANE. replace the zeros with your actual Facebook App ID
-            While doing that, notice the empty space after the "\ ". This is required because the ANE
-            must see the value as an String.
+                This is required by the Facebook ANE. replace the zeros with your actual Facebook App ID
+                While doing that, notice the empty space after the "\ ". This is required because the ANE
+                must see the value as an String.
             -->
-            <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="\ 134318226739783"/>
+            <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="\ 00000000000"/>
             
             <!-- This is required by the Facebook ANE for logging in -->
-            <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="My App Name" />
-            <activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@style/Theme.Transparent" />
+            <activity
+                android:name="com.facebook.FacebookActivity"
+                android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:label="My App Name" />
+            <activity
+                android:name="com.doitflash.facebook.access.MyLogin"
+                android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                android:theme="@style/Theme.Transparent" />
             
             <activity android:name="com.facebook.CustomTabMainActivity" />
-            <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="fb134318226739783" />
-            </intent-filter>
+            <activity android:name="com.facebook.CustomTabActivity" android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data android:scheme="fb00000000000" />
+                </intent-filter>
             </activity>
             
             <!-- This is required by the Facebook ANE for sharing https://developers.facebook.com/docs/sharing/android -->
-            <provider android:authorities="com.facebook.app.FacebookContentProvider134318226739783" android:name="com.facebook.FacebookContentProvider" android:exported="true" />
-            <activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
+            <provider
+                android:authorities="com.facebook.app.FacebookContentProvider00000000000"
+                android:name="com.facebook.FacebookContentProvider"
+                android:exported="true" />
+                
+            <activity
+                android:name="com.doitflash.facebook.sharing.MyShare"
+                android:theme="@style/Theme.Transparent" />
             
             <!-- This is required by the Facebook ANE for app invite feature -->
-            <activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
+            <activity
+                android:name="com.doitflash.facebook.invite.MyInvite"
+                android:theme="@style/Theme.Transparent" />
             
             </application>
             
@@ -86,30 +96,29 @@
             <string>NO</string>
             
             <key>FacebookAppID</key>
-            <string>134318226739783</string>
+            <string>00000000000</string>
             
             <key>FacebookDisplayName</key>
             <string>Air Native Extension</string>
             
             <key>CFBundleURLTypes</key>
             <array>
-            <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-            <string>fb134318226739783</string>
-            
-            <!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
-            <string>air.com.doitflash.exfacebook2</string>
-            </array>
-            </dict>
+                <dict>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>fb00000000000</string>
+                        <!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
+                        <string>air.com.doitflash.exfacebook2</string>
+                    </array>
+                </dict>
             </array>
             
             <key>LSApplicationQueriesSchemes</key>
             <array>
-            <string>fbapi</string>
-            <string>fb-messenger-api</string>
-            <string>fbauth2</string>
-            <string>fbshareextension</string>
+                <string>fbapi</string>
+                <string>fb-messenger-api</string>
+                <string>fbauth2</string>
+                <string>fbshareextension</string>
             </array>
             
             <key>NSPhotoLibraryUsageDescription</key>
@@ -117,8 +126,8 @@
             
             <key>UIDeviceFamily</key>
             <array>
-            <string>1</string>
-            <string>2</string>
+                <string>1</string>
+                <string>2</string>
             </array>
             
         ]]></InfoAdditions>

@@ -46,7 +46,7 @@ package
 	 * @author Hadi Tavakoli - 7/31/2015 3:33 PM
 	 * 							10/31/2016 3:40 PM
 	 */
-	public class Demo extends Sprite 
+	public class Demo extends Sprite
 	{
 		private const BTN_WIDTH:Number = 150;
 		private const BTN_HEIGHT:Number = 60;
@@ -61,7 +61,7 @@ package
 		private var bm:Bitmap;
 		private var like:LikeBtn;
 		
-		public function Demo():void 
+		public function Demo():void
 		{
 			Multitouch.inputMode = MultitouchInputMode.GESTURE;
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, handleActivate);
@@ -164,11 +164,7 @@ package
 		
 		private function myDebuggerDelegate($ane:String, $class:String, $msg:String):void
 		{
-			trace("------------------");
-			trace("$ane = " + $ane);
-			trace("$class = " + $class);
-			trace("$msg = " + $msg);
-			trace("------------------");
+			trace($ane+"("+$class+") "+$msg);
 		}
 		
 		private function init():void
@@ -176,7 +172,6 @@ package
 			// remove this line in production build or pass null as the delegate
 			OverrideAir.enableDebugger(myDebuggerDelegate);
 			
-			// App link: https://fb.me/477806509057618
 			FB.getInstance("00000000000");
 			if (FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey);
 			
@@ -417,12 +412,16 @@ package
 					like.dispose();
 					like.removeEventListener(FBEvent.LIKE_BTN_CREATED, onBtnCreated);
 					like.removeEventListener(FBEvent.LIKE_BTN_ERROR, onBtnError);
+					like.removeEventListener(FBEvent.LIKE_BTN_UPDATED, onBtnUpdated);
+					like.removeEventListener(FBEvent.LIKE_BTN_CLICKED, onBtnClicked);
 				}
 				
 				like = FB.createLikeBtn("https://www.facebook.com/myflashlab", LikeBtn.STYLE_STANDARD, LikeBtn.LINK_TYPE_PAGE, stage);
 				like.name = "myLikeBtn"
 				like.addEventListener(FBEvent.LIKE_BTN_CREATED, onBtnCreated);
 				like.addEventListener(FBEvent.LIKE_BTN_ERROR, onBtnError);
+				like.addEventListener(FBEvent.LIKE_BTN_UPDATED, onBtnUpdated);
+				like.addEventListener(FBEvent.LIKE_BTN_CLICKED, onBtnClicked);
 			}
 			
 			function onBtnError(e:FBEvent):void
@@ -433,6 +432,18 @@ package
 			function onBtnCreated(e:FBEvent):void
 			{
 				TweenMax.to(like, 0.5, {x:stage.stageWidth / 2 - like.width / 2, y:stage.stageHeight / 2 - like.height / 2});
+			}
+			
+			function onBtnUpdated(e:FBEvent):void
+			{
+				like.setVisibility(true);
+			}
+			
+			function onBtnClicked(e:FBEvent):void
+			{
+				like.setVisibility(false);
+				C.log(" like btn clicked");
+				trace(" like btn clicked");
 			}
 			
 			// -------------------------

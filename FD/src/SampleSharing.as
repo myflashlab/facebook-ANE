@@ -140,7 +140,7 @@ package
 		
 		private function init():void
 		{
-			FB.getInstance("000000000000000");
+			FB.getInstance("00000000000");
 			trace("hash key = ", FB.hashKey);
 			
 			var btn1:MySprite = createBtn("share a link");

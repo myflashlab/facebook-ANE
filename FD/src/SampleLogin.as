@@ -1,6 +1,7 @@
 package 
 {
-	import com.myflashlab.air.extensions.facebook.access.Permissions;
+import com.myflashlab.air.extensions.dependency.OverrideAir;
+import com.myflashlab.air.extensions.facebook.access.Permissions;
 	import com.myflashlab.air.extensions.facebook.access.Auth;
 	import com.myflashlab.air.extensions.facebook.FB;
 	import com.myflashlab.air.extensions.facebook.FBEvent;
@@ -139,10 +140,18 @@ package
 			}
 		}
 		
+		private function myDebuggerDelegate($ane:String, $class:String, $msg:String):void
+		{
+			trace($ane+"("+$class+") "+$msg);
+		}
+		
 		private function init():void
 		{
+			// remove this line in production build or pass null as the delegate
+			OverrideAir.enableDebugger(myDebuggerDelegate);
+			
 			// call this method only once in your app loading up
-			FB.getInstance("000000000000000");
+			FB.getInstance("00000000000");
 			trace("hash key = ", FB.hashKey);
 			
 			// -------------------------
@@ -153,6 +162,7 @@ package
 			
 			function checkAccess(e:MouseEvent):void
 			{
+				C.log("islogin = " + FB.auth.isLogin);
 				C.log("token = " + FB.auth.token);
 				C.log("permissions = " + FB.auth.permissions);
 				C.log("declined Permissions = " + FB.auth.declinedPermissions);

@@ -142,7 +142,7 @@ package
 		
 		private function init():void
 		{
-			FB.getInstance("134318226739783");
+			FB.getInstance("00000000000");
 			trace("hash key = ", FB.hashKey);
 			
 			// -------------------------

@@ -1,5 +1,6 @@
 package 
 {
+	import com.myflashlab.air.extensions.dependency.OverrideAir;
 	import com.myflashlab.air.extensions.facebook.FB;
 	import com.myflashlab.air.extensions.facebook.FBEvent;
 	import com.myflashlab.air.extensions.facebook.LikeBtn;
@@ -139,9 +140,17 @@ package
 			}
 		}
 		
+		private function myDebuggerDelegate($ane:String, $class:String, $msg:String):void
+		{
+			trace($ane+"("+$class+") "+$msg);
+		}
+		
 		private function init():void
 		{
-			FB.getInstance("000000000000000");
+			// remove this line in production build or pass null as the delegate
+			OverrideAir.enableDebugger(myDebuggerDelegate);
+			
+			FB.getInstance("00000000000");
 			trace("hash key = ", FB.hashKey);
 			
 			var btn1:MySprite = createBtn("create LIKE btn");
@@ -155,6 +164,7 @@ package
 				like1.addEventListener(FBEvent.LIKE_BTN_CREATED, onBtnCreated);
 				like1.addEventListener(FBEvent.LIKE_BTN_ERROR, onBtnError);
 				like1.addEventListener(FBEvent.LIKE_BTN_UPDATED, onBtnUpdated);
+				like1.addEventListener(FBEvent.LIKE_BTN_CLICKED, onBtnClicked);
 			}
 			
 			// ----------------------------
@@ -216,6 +226,13 @@ package
 			btn.dispose();
 			btn = null;
 			C.log("btn.dispose();");*/
+		}
+		
+		private function onBtnClicked(e:FBEvent):void
+		{
+			var btn:LikeBtn = e.target as LikeBtn;
+			C.log(" clicked: " + btn.name);
+			trace(" clicked: " + btn.name);
 		}
 		
 		
