@@ -1,4 +1,4 @@
-# Facebook SDK ANE V4.22.3 (Android + iOS)
+# Facebook SDK ANE V4.22.5 (Android + iOS)
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe AIR apps.
 
 Main features:
@@ -15,14 +15,10 @@ Main features:
 # asdoc
 [find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/package-detail.html)
 
-# Demo .apk
-you may like to see the ANE in action? [Download demo .apk](https://github.com/myflashlab/facebook-ANE/tree/master/FD/dist)
-
-**NOTICE**: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.
-[Download the ANE](https://github.com/myflashlab/facebook-ANE/tree/master/FD/lib)
+[Download demo ANE](https://github.com/myflashlab/facebook-ANE/tree/master/AIR/lib)
 
 # AIR Usage
-###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/FD/src)
+###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/AIR/src)
 ```actionscript
 FB.getInstance("000000000000000"); // facebook app ID you received from your Facebook API console
 if(FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey); // required once for Android only
@@ -232,17 +228,17 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)  
 
 # Changelog
-*Sep 03, 2017 - V4.22.3*
+*Dec 15, 2017 - V4.22.5*
+* Optimized for [ANE-LAB software](https://github.com/myflashlab/ANE-LAB/).
 
+*Sep 03, 2017 - V4.22.3*
 * Added callbacks to know when the like button is clicked, [requested here](https://github.com/myflashlab/facebook-ANE/issues/92). You need to listen to this event: ```FBEvent.LIKE_BTN_CLICKED```.
 
 *Aug 19, 2017 - V4.22.2*
-
 * Fixed bug #90
 * Added IntelliJ demo
 
 *May 16, 2017 - V4.22.1*
-
 * updated the core facebook SDK to V4.22.1
 * The ```FB.graph.request``` method along with the ```FB.graph.version``` property is removed. these were deprecated in the last release and are now removed. instead you have to use the [FB.graph.call](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/access/Graph.html#call()) method to access the graph.
 * new methods introduced: [FB.setUserId](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#setUserId()), [FB.clearUserId](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#clearUserId()) and  [FB.updateUserProperties](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#updateUserProperties())
@@ -275,11 +271,9 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
   * Don't forget to include other manifest settings. Above, we only mentioned what is changed.
 
 *Mar 17, 2017 - V4.17.1*
-
 * Updated the ANE with OverrideAIR V4.0.0 From now on, this ANE will also be needed for the iOS side too.
 
 *Nov 10, 2016 - V4.17.0*
-
 * Optimized for manual permissions required by AIR SDK 24+
 * Min AIR SDK 24 to compile this ANE with swf-version set to 35
 * updated the core facebook SDK to V4.17.0 - Make sure to update your current [Facebook frameworks for iOS](https://github.com/myflashlab/facebook-ANE/blob/master/FB_SDK_FRAMEWORKS.zip)
@@ -303,7 +297,6 @@ FB.graph.call("https://graph.facebook.com/v2.8/me", URLRequestMethod.GET, new UR
 ```
 
 *May 16, 2016 - V4.11.0*
-
 * updated the core facebook SDK to [V4.11.0](https://developers.facebook.com/docs/android/change-log-4.x)
 * Support Android API 15 or higher
 * your app must be compiled with Air SDK 22 or higher
@@ -318,33 +311,27 @@ FB.graph.call("https://graph.facebook.com/v2.8/me", URLRequestMethod.GET, new UR
 
 
 *Jan 20, 2016 - V3.9.2*
-
 * bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
 
 
 *Dec 20, 2015 - V3.9.1*
-
 * minor bug fixes
 
 
 *Nov 02, 2015 - V3.9*
-
 * doitflash devs merged into MyFLashLab Team
 
 
 *Sep 08, 2015 - V3.0*
-
 * Added support for App invites https://developers.facebook.com/docs/app-invites
 * Fixed Like button bug in Android where the button interface was not being updated after coming back to the flash app
 * Requires commonDependenciesV4.0.ane or higher https://github.com/myflashlab/common-dependencies-ANE
 
 
 *Jul 31, 2015 - V2.0*
-
 * Added iOS support
 * Minor bug fixes on Android side
 
 
 *Jul 17, 2015 - V1.0*
-
 * beginning of the journey!

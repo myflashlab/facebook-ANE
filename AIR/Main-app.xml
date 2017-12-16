@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<application xmlns="http://ns.adobe.com/air/application/26.0">
+<application xmlns="http://ns.adobe.com/air/application/27.0">
     <id>com.doitflash.exFacebook2</id>
-    <versionNumber>4.22.3</versionNumber>
+    <versionNumber>4.22.5</versionNumber>
     <supportedProfiles>mobileDevice</supportedProfiles>
     <filename>exFacebook</filename>
     <name>FB ANE</name>
@@ -25,10 +25,9 @@
                     <action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.BROWSABLE" />
                     <category android:name="android.intent.category.DEFAULT" />
-            
                     <!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
                     <data android:scheme="air.com.doitflash.exfacebook2" />
-                    </intent-filter>
+                </intent-filter>
             </activity>
             
             <!--
@@ -44,6 +43,7 @@
                 android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar"
                 android:label="My App Name" />
+                
             <activity
                 android:name="com.doitflash.facebook.access.MyLogin"
                 android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -65,14 +65,10 @@
                 android:name="com.facebook.FacebookContentProvider"
                 android:exported="true" />
                 
-            <activity
-                android:name="com.doitflash.facebook.sharing.MyShare"
-                android:theme="@style/Theme.Transparent" />
+            <activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
             
             <!-- This is required by the Facebook ANE for app invite feature -->
-            <activity
-                android:name="com.doitflash.facebook.invite.MyInvite"
-                android:theme="@style/Theme.Transparent" />
+            <activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
             
             </application>
             

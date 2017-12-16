@@ -150,10 +150,7 @@ package
 			function shareLink(e:MouseEvent):void
 			{
 				var shareModel:ShareLink = new ShareLink();
-				shareModel.contentTitle = "title!";
 				shareModel.contentURL = "http://myflashlabs.com";
-				shareModel.imageURL = "http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg";
-				shareModel.contentDescription = "description!";
 				FB.share(shareModel, onSharingResult);
 			}
 			

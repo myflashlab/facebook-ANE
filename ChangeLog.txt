@@ -1,5 +1,8 @@
 Facebook SDK Adobe Air Native Extension
 
+*Dec 15, 2017 - V4.22.5*
+* Optimized for [ANE-LAB software](https://github.com/myflashlab/ANE-LAB/).
+
 *Sep 03, 2017 - V4.22.3*
 * Added callbacks to know when the like button is clicked, [requested here](https://github.com/myflashlab/facebook-ANE/issues/92). You need to listen to this event: ```FBEvent.LIKE_BTN_CLICKED```.
 
