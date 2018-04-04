@@ -1,5 +1,25 @@
 Facebook SDK Adobe Air Native Extension
 
+*Apr 4, 2018 - V4.30.0*
+* Updated to Facebook SDK V4.30.0 on both Android and iOS.
+* You need to update the iOS frameworks from this package: https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.30.0.zip
+  * FBSDKCoreKit.framework
+  * FBSDKLoginKit.framework
+  * FBSDKShareKit.framework
+  * Bolts.framework
+* Facebook Invites and Native Like buttons have been deprecated and are removed from the ANE.
+* AS3 API re-write from scratch to be able to work with Facebook SDK easier. In your AIR project, simply import ```import com.myflashlab.air.extensions.fb.*```.
+* asdoc location changed to **http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html**
+* Read wiki pages to learn how to initialize and access different Facebook APIs: https://github.com/myflashlab/facebook-ANE/wiki
+* You will need at least AIR SDK 28 to run this ANE.
+* Android API 19 is the oldest Android API version to be supported.
+* AIR Manifest changes:
+  * removed the tag ```<activity android:name="com.doitflash.facebook.access.MyLogin" ....```
+  * removed the tag ```<activity android:name="com.doitflash.facebook.sharing.MyShare" ...```
+  * removed the tag ```<activity android:name="com.doitflash.facebook.invite.MyInvite" ...```
+  * Added ```<string>fb-messenger-share-api</string>``` and ```<string>fb-messenger</string>``` to ```LSApplicationQueriesSchemes```.
+* A lot of new features are added like ```Facebook.games.requestDialog```, ```Facebook.isFacebookMessengerAppInstalled``` or ```Facebook.appEvents.logPurchase``` and many more. to learn about them, please read the wiki docs.
+
 *Dec 15, 2017 - V4.22.5*
 * Optimized for [ANE-LAB software](https://github.com/myflashlab/ANE-LAB/).
 

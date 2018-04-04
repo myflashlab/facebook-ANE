@@ -1,4 +1,4 @@
-# Facebook SDK ANE V4.22.5 (Android + iOS)
+# Facebook SDK ANE V4.30.0 (Android + iOS)
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe AIR apps.
 
 Main features:
@@ -6,58 +6,89 @@ Main features:
 * ask users for permissions
 * decide on your app logic based on granted permissions
 * Share URL links directly from your app
-* create Facebook like button and place it inside your AIR app
-* send App Invite to friends
+* send Game Requests to friends
 * Support App Events for use in Facebook analytics
 * full access to Facebook Graph API... the sky is the limit!
 * works on Android and iOS with an identical AS3 library
 
 # asdoc
-[find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/package-detail.html)
+[find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html)
 
 [Download demo ANE](https://github.com/myflashlab/facebook-ANE/tree/master/AIR/lib)
 
 # AIR Usage
 ###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/AIR/src)
 ```actionscript
-FB.getInstance("000000000000000"); // facebook app ID you received from your Facebook API console
-if(FB.os == FB.ANDROID) trace("hash key = ", FB.hashKey); // required once for Android only
+import com.myflashlab.air.extensions.fb.*;
 
-FB.auth.addEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-FB.auth.addEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-FB.auth.addEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+Facebook.init("134318226739783");
 
-// an array of permissions. you can add or remove items from this array anytime you like
-FB.auth.requestPermission(Auth.WITH_READ_PERMISSIONS, Permissions.public_profile, Permissions.user_friends, Permissions.email);
+// Add these listeners right after initializing the ANE
+Facebook.listener.addEventListener(FacebookEvents.INIT, onAneInit);
+Facebook.listener.addEventListener(FacebookEvents.INVOKE, onAneInvoke);
 
-function onLoginSuccess(event:FBEvent):void
+// You can receive the hashKey for your Android certificate like below.
+if (Facebook.os == Facebook.ANDROID) trace("hash key = ", Facebook.hashKey);
+
+function onAneInvoke(e:FacebookEvents):void
 {
-	FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-	FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-	FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
-	
-	trace("onLoginSuccess");
-	trace("token = " + FB.auth.token);
-	trace("permissions = " + FB.auth.permissions);
-	trace("declined Permissions = " + FB.auth.declinedPermissions);
+	trace("onAneInvoke: " + decodeURIComponent(e.deeplink));
 }
 
-function onLoginCanceled(event:FBEvent):void
+function onAneInit(e:FacebookEvents):void
 {
-	FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-	FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-	FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+	trace("onAneInit");
 	
-	trace("onLoginCanceled");
+	// check if user is already logged in or not
+	_accessToken = Facebook.auth.currentAccessToken;
+	
+	/*
+		IMPORTANT: in practice you should let users click on a login button 
+		not logging them automatically.
+	*/
+	if(!_accessToken) toLogin();
 }
 
-function onLoginError(event:FBEvent):void
+function toLogin():void
 {
-	FB.auth.removeEventListener(FBEvent.LOGIN_DONE, onLoginSuccess);
-	FB.auth.removeEventListener(FBEvent.LOGIN_CANCELED, onLoginCanceled);
-	FB.auth.removeEventListener(FBEvent.LOGIN_ERROR, onLoginError);
+	/*
+		It is recommended to login users with minimal permissions. Later, whe your app 
+		needs more permissions, you can call "Facebook.auth.login" again with more permissions.
+		
+		To ask for publish permissions, set the first parameter to "true".
+	*/
 
-	trace("onLoginError = " + event.param);
+	var permissions:Array = [Permissions.public_profile, Permissions.user_friends, Permissions.email];
+	Facebook.auth.login(false, permissions, loginCallback);
+	
+	function loginCallback($isCanceled:Boolean, $error:Error, $accessToken:AccessToken, $recentlyDeclined:Array, $recentlyGranted:Array):void
+	{
+		if($error)
+		{
+			trace("login error: " + $error.message);
+		}
+		else
+		{
+			if($isCanceled)
+			{
+				trace("login canceled by user");
+			}
+			else
+			{
+				trace("$recentlyDeclined: " + $recentlyDeclined);
+				trace("$recentlyGranted: " + $recentlyGranted);
+				
+				_accessToken = $accessToken;
+				
+				trace("token: " + _accessToken.token);
+				trace("userId: " + _accessToken.userId);
+				trace("declinedPermissions: " + _accessToken.declinedPermissions);
+				trace("grantedPermissions: " + _accessToken.grantedPermissions);
+				trace("expiration: " + new Date(_accessToken.expiration).toLocaleDateString());
+				trace("lastRefresh: " + new Date(_accessToken.lastRefresh).toLocaleDateString());
+			}
+		}
+	}
 }
 ```
 
@@ -97,8 +128,11 @@ function onLoginError(event:FBEvent):void
 			<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="\ 000000000000000"/>
 			
 			<!-- This is required by the Facebook ANE for logging in -->
-			<activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="My App Name" />
-			<activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@style/Theme.Transparent" />
+			<activity 
+				android:name="com.facebook.FacebookActivity" 
+				android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+				android:theme="@android:style/Theme.Translucent.NoTitleBar" 
+				android:label="My App Name" />
 			
 			<activity android:name="com.facebook.CustomTabMainActivity" />
 			<activity
@@ -112,13 +146,7 @@ function onLoginError(event:FBEvent):void
 				</intent-filter>
 			</activity>
 			
-			
-			<!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
 			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
-			<activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
-			
-			<!-- This is required for app invite feature -->
-			<activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
 			
 		</application>
 		
@@ -159,6 +187,8 @@ function onLoginError(event:FBEvent):void
 		<array>
 			<string>fbapi</string>
 			<string>fb-messenger-api</string>
+			<string>fb-messenger-share-api</string>
+			<string>fb-messenger</string>
 			<string>fbauth2</string>
 			<string>fbshareextension</string>
 		</array>
@@ -196,38 +226,50 @@ function onLoginError(event:FBEvent):void
 
 # Requirements:
 1. This ANE is dependent on **androidSupport.ane** and **overrideAir.ane** You need to add these ANEs to your project too. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
-2. Compile with Air SDK 25 or above.
+2. Compile with Air SDK 28 or above.
 3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
-  - download FB_SDK_FRAMEWORKS.zip package from our github and extract them on your computer.
+  - download [FacebookSDKs-iOS-4.30.0.zip](https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.30.0.zip) package and extract them on your computer.
+    * FBSDKCoreKit.framework
+    * FBSDKLoginKit.framework
+    * FBSDKShareKit.framework
+    * Bolts.framework
   - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
   - when in your Air SDK, go to "\lib\aot\stub". here you will find all the iOS frameworks provided by Air SDK by default.
   - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
-4. Android SDK 15 or higher 
-5. iOS 8.0 or higher
-6. When compiling on Android, make sure you are always compiling in debug or captive mode. shared mode won't work because in the extension we have overwritten some Adobe classes for the extension to work properly.
+4. Android SDK 19 or higher 
+5. iOS 9.0 or higher
+6. When compiling on Android, make sure you are always compiling in debug or captive mode. shared mode won't work.
 
 # Commercial Version
 http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 
-![Facebook SDK ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-1-595x738.jpg)
-
-# Tech Details
-* If Facebook official app is not installed, a chrome tab on Android and Safari ViewController on iOS will be opened. To make sure that works, you need to have added the ```CustomTabActivity``` and ```CustomTabMainActivity``` activities to your manifest.
-* When building on iOS, if you are seeing compilation errors like ```Installation Error: PackageExtractionFailed.```, check if the ```androidSupport.ane``` is present. If it is, remove it. It's only needed on the Android side anyway.
+![Facebook SDK ANE](https://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
 
 # Tutorials
 [How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
-[Understanding how Facebook SDK works in general](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-1)  
-[Creating a Facebook application. A place for your app to connect to](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-2)  
-[Connecting your FB app to your mobile app with a hash key](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-3)  
-[Managing login/out and asking permissions from users](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-4)  
-[Generating real Facebook Like buttons in your apps](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-5)  
-[Knowing how to share content from your app](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-6)  
-[Understanding Facebook Graph API. how to request for information](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-7)  
-[Setting up the Air manifest .xml file for Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-8)  
-[Compiling requirements on Android and iOS](http://myappsnippet.com/adobe-air-facebook-sdk-integration-part-9)  
+[Usage WIKI](https://github.com/myflashlab/facebook-ANE/wiki)
 
 # Changelog
+*Apr 4, 2018 - V4.30.0*
+* Updated to Facebook SDK V4.30.0 on both Android and iOS.
+* You need to update the iOS frameworks from [this package](https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.30.0.zip)
+  * FBSDKCoreKit.framework
+  * FBSDKLoginKit.framework
+  * FBSDKShareKit.framework
+  * Bolts.framework
+* Facebook Invites and Native Like buttons have been deprecated and are removed from the ANE.
+* AS3 API re-write from scratch to be able to work with Facebook SDK easier. In your AIR project, simply import ```import com.myflashlab.air.extensions.fb.*```.
+* asdoc location changed to **http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html**
+* Read wiki pages to learn how to initialize and access different Facebook APIs: https://github.com/myflashlab/facebook-ANE/wiki
+* You will need at least AIR SDK 28 to run this ANE.
+* Android API 19 is the oldest Android API version to be supported.
+* AIR Manifest changes:
+  * removed the tag ```<activity android:name="com.doitflash.facebook.access.MyLogin" ....```
+  * removed the tag ```<activity android:name="com.doitflash.facebook.sharing.MyShare" ...```
+  * removed the tag ```<activity android:name="com.doitflash.facebook.invite.MyInvite" ...```
+  * Added ```<string>fb-messenger-share-api</string>``` and ```<string>fb-messenger</string>``` to ```LSApplicationQueriesSchemes```.
+* A lot of new features are added like ```Facebook.games.requestDialog```, ```Facebook.isFacebookMessengerAppInstalled``` or ```Facebook.appEvents.logPurchase``` and many more. to learn about them, please read the wiki docs.
+
 *Dec 15, 2017 - V4.22.5*
 * Optimized for [ANE-LAB software](https://github.com/myflashlab/ANE-LAB/).
 
