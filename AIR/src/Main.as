@@ -324,9 +324,7 @@ public class Main extends Sprite
 			C.log("sharing via messenger app, please wait...");
 			
 			var content:ShareLinkContent = new ShareLinkContent();
-			content.quote = "This is a test quote message...";
 			content.contentUrl = "https://myflashlabs.com/";
-			content.hashtag = "#myflashlabs";
 			
 			Facebook.share.shareMessenger(content, function ($error:Error):void
 			{
