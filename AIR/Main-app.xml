@@ -68,7 +68,7 @@
         <InfoAdditions><![CDATA[
             
             <key>MinimumOSVersion</key>
-            <string>8.0</string>
+            <string>9.0</string>
             
             <key>UIStatusBarStyle</key>
             <string>UIStatusBarStyleBlackOpaque</string>
