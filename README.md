@@ -21,7 +21,7 @@ Main features:
 ```actionscript
 import com.myflashlab.air.extensions.fb.*;
 
-Facebook.init("134318226739783");
+Facebook.init("000000000000000");
 
 // Add these listeners right after initializing the ANE
 Facebook.listener.addEventListener(FacebookEvents.INIT, onAneInit);
