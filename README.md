@@ -1,4 +1,4 @@
-# Facebook SDK ANE V4.30.0 (Android + iOS)
+# Facebook SDK ANE V4.30.1 (Android + iOS)
 This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe AIR apps.
 
 Main features:
@@ -250,6 +250,10 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Usage WIKI](https://github.com/myflashlab/facebook-ANE/wiki)
 
 # Changelog
+*Apr 28, 2018 - V4.30.1*
+* Fixed issue [#129](https://github.com/myflashlab/facebook-ANE/issues/129)
+* Fixed issue [#128](https://github.com/myflashlab/facebook-ANE/issues/128)
+
 *Apr 4, 2018 - V4.30.0*
 * Updated to Facebook SDK V4.30.0 on both Android and iOS.
 * You need to update the iOS frameworks from [this package](https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.30.0.zip)

@@ -1,5 +1,9 @@
 Facebook SDK Adobe Air Native Extension
 
+*Apr 28, 2018 - V4.30.1*
+* Fixed issue [#129](https://github.com/myflashlab/facebook-ANE/issues/129)
+* Fixed issue [#128](https://github.com/myflashlab/facebook-ANE/issues/128)
+
 *Apr 4, 2018 - V4.30.0*
 * Updated to Facebook SDK V4.30.0 on both Android and iOS.
 * You need to update the iOS frameworks from this package: https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.30.0.zip
