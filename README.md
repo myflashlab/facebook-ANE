@@ -1,5 +1,5 @@
-# Facebook SDK ANE V4.30.1 (Android + iOS)
-This extension is the cleanest and the most easy to work with Facebook API you can find online. don't take my word for it. download it for free and test it for yourself. this will be your best solution to integrate Facebook into your Adobe AIR apps.
+# Facebook SDK ANE V4.35.0 (Android + iOS)
+Use this AIR Native Extension to implement the latest official Facebook SDK into your AIR applications.
 
 Main features:
 * Login/logout
@@ -100,9 +100,13 @@ function toLogin():void
 		<uses-permission android:name="android.permission.WAKE_LOCK" />
 		<uses-permission android:name="android.permission.INTERNET" />
 		
-		<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="23"/>
+		<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26"/>
 		
-		<application android:hardwareAccelerated="true" android:allowBackup="true">
+		<application 
+			android:hardwareAccelerated="true" 
+			android:allowBackup="true"
+			android:name="android.support.multidex.MultiDexApplication">
+
 			<activity android:hardwareAccelerated="false">
 				<intent-filter>
 					<action android:name="android.intent.action.MAIN" />
@@ -114,7 +118,7 @@ function toLogin():void
 					<category android:name="android.intent.category.DEFAULT" />
 					
 					<!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
-					<data android:scheme="air.com.doitflash.exfacebook2" />
+					<data android:scheme="[PACKAGE_NAME]" />
 				</intent-filter>
 			</activity>
 			
@@ -135,9 +139,7 @@ function toLogin():void
 				android:label="My App Name" />
 			
 			<activity android:name="com.facebook.CustomTabMainActivity" />
-			<activity
-				android:name="com.facebook.CustomTabActivity"
-				android:exported="true">
+			<activity android:name="com.facebook.CustomTabActivity" android:exported="true">
 				<intent-filter>
 					<action android:name="android.intent.action.VIEW" />
 					<category android:name="android.intent.category.DEFAULT" />
@@ -147,7 +149,22 @@ function toLogin():void
 			</activity>
 			
 			<provider android:authorities="com.facebook.app.FacebookContentProvider000000000000000" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
-			
+
+			<receiver
+				android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver" android:exported="false">
+				<intent-filter>
+					<action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+				</intent-filter>
+			</receiver>
+
+			<!--
+				change "[PACKAGE_NAME]" to your own package name
+			-->
+			<provider
+				android:name="com.facebook.marketing.internal.MarketingInitProvider"
+				android:authorities="[PACKAGE_NAME].MarketingInitProvider"
+				android:exported="false" />
+
 		</application>
 		
 </manifest>]]></manifestAdditions>
@@ -178,7 +195,7 @@ function toLogin():void
 					<string>fb000000000000000</string>
 					
 					<!-- Your application scheme. read here for more information: http://www.myflashlabs.com/open-adobe-air-app-browser-pass-parameters/ -->
-					<string>air.com.doitflash.exfacebook2</string>
+					<string>[PACKAGE_NAME]</string>
 				</array>
 			</dict>
 		</array>
@@ -212,36 +229,51 @@ function toLogin():void
   <extensions>
   
 	<extensionID>com.myflashlab.air.extensions.facebook</extensionID>
-	
-	<!-- The following dependency ANEs are required Download from https://github.com/myflashlab/common-dependencies-ANE -->
-	
-	<!-- This dependency is needed on Android and iOS -->
-    <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
-	
-	<!-- This dependency is needed on Android ONLY. You may need to comment it out if necessary -->
-    <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
-	
+
+	<!-- Needed on Android/iOS -->
+	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+
+	<!-- Needed on Android ONLY -->
+	<extensionID>com.myflashlab.air.extensions.dependency.bolts</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>
+
   </extensions>
 ```
 
 # Requirements:
-1. This ANE is dependent on **androidSupport.ane** and **overrideAir.ane** You need to add these ANEs to your project too. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
-2. Compile with Air SDK 28 or above.
-3. To compile on iOS, you will need to add the Facebook frameworks to your Air SDK.
-  - download [FacebookSDKs-iOS-4.30.0.zip](https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.30.0.zip) package and extract them on your computer.
+1. This ANE is dependent on the following ANEs. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
+	* overrideAir.ane
+	* bolts.ane
+	* androidSupport-appcompatV7.ane
+	* androidSupport-arch.ane
+	* androidSupport-cardviewV7.ane
+	* androidSupport-core.ane
+	* androidSupport-customtabs.ane
+	* androidSupport-v4.ane
+2. AIR SDK V30+
+3. To compile on iOS, you will need to add following Facebook frameworks to your Air SDK.
+  - download [FacebookSDKs-iOS-4.35.0.zip](https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.35.0.zip) package and extract them on your computer.
     * FBSDKCoreKit.framework
     * FBSDKLoginKit.framework
     * FBSDKShareKit.framework
     * Bolts.framework
+    * FBSDKMarketingKit.framework
+    * FBSDKMessengerShareKit.framework
+    * FBSDKPlacesKit.framework
   - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
   - when in your Air SDK, go to "\lib\aot\stub". here you will find all the iOS frameworks provided by Air SDK by default.
   - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
 4. Android SDK 19 or higher 
 5. iOS 9.0 or higher
-6. When compiling on Android, make sure you are always compiling in debug or captive mode. shared mode won't work.
+6. In case you see this error message ```Undefined symbols ___isOSVersionAtLeast``` when compiling for iOS, check out [this video clip](https://www.youtube.com/watch?v=m4bwZRCvs2c) to know how to resolve it.
 
 # Commercial Version
-http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
+https://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 
 ![Facebook SDK ANE](https://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-595x738.jpg)
 
@@ -250,6 +282,39 @@ http://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Usage WIKI](https://github.com/myflashlab/facebook-ANE/wiki)
 
 # Changelog
+*Sep 10, 2018 - V4.35.0*
+* Updated to the official Facebook SDK V4.35.0.
+  * If you see an error like ```Undefined symbols ___isOSVersionAtLeast``` when compiling the iOS side, please watch this video: https://www.youtube.com/watch?v=m4bwZRCvs2c  
+* Remove the androidSupport ANE from your project and from your manifest. *com.myflashlab.air.extensions.dependency.androidSupport*
+* We have split the androidSupport dependency into smaller ANEs for better performance. You need to include the following ANEs to your project instead of one androidSupport ANE:
+  * ```<extensionID>com.myflashlab.air.extensions.dependency.bolts</extensionID>```
+  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>```
+  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>```
+  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>```
+  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>```
+  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>```
+  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>```
+* Added property ```appId``` to AccessToken instances
+* For expert users, now the ANE supports manual generation of AccessToken instance using the newly introduced method ```Facebook.auth.manualInit```. If you don't know what this method is, do not use it at all. Eventually, to use the generated AccessToken, we have made the ```Facebook.auth.currentAccessToken``` property writeable also so you can pass the AccessToken instance to it.
+* New method ```Facebook.auth.isCurrentAccessTokenActive``` introduced. This will tell you if the current AccessToken is active or not.
+* Upgrade to Facebook Graph API Version 3.1
+* Add the following receiver tag to your manifest:
+```xml
+<receiver
+    android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver" android:exported="false">
+    <intent-filter>
+        <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+    </intent-filter>
+</receiver>
+```
+* Add the following provider tag to your manifest but make sure you are replacing [PACKAGE_NAME] with your own app package name. Don't forget that Android AIR apps adds *air.* to the beginning of your package name.
+```xml
+<provider
+    android:name="com.facebook.marketing.internal.MarketingInitProvider"
+    android:authorities="[PACKAGE_NAME].MarketingInitProvider"
+    android:exported="false" />
+```
+
 *Apr 28, 2018 - V4.30.1*
 * Fixed issue [#129](https://github.com/myflashlab/facebook-ANE/issues/129)
 * Fixed issue [#128](https://github.com/myflashlab/facebook-ANE/issues/128)

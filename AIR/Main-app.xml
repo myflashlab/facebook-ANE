@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<application xmlns="http://ns.adobe.com/air/application/29.0">
+<application xmlns="http://ns.adobe.com/air/application/30.0">
     <id>com.doitflash.exFacebook2</id>
-    <versionNumber>4.30.1</versionNumber>
+    <versionNumber>4.35.0</versionNumber>
     <supportedProfiles>mobileDevice</supportedProfiles>
     <filename>exFacebook</filename>
     <name>Facebook ANE</name>
@@ -12,9 +12,12 @@
             <uses-permission android:name="android.permission.WAKE_LOCK" />
             <uses-permission android:name="android.permission.INTERNET" />
             
-            <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="23"/>
+            <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26"/>
             
-            <application android:hardwareAccelerated="true" android:allowBackup="true">
+            <application
+                android:hardwareAccelerated="true"
+                android:allowBackup="true"
+                android:name="android.support.multidex.MultiDexApplication">
             
             <activity android:hardwareAccelerated="false">
                 <intent-filter>
@@ -31,7 +34,7 @@
             </activity>
             
             <!--
-                This is required by the Facebook ANE. replace the zeros with your actual Facebook App ID
+                These are required by the Facebook ANE. replace the zeros with your actual Facebook App ID
                 While doing that, notice the empty space after the "\ ". This is required because the ANE
                 must see the value as an String.
             -->
@@ -58,6 +61,21 @@
                 android:authorities="com.facebook.app.FacebookContentProvider00000000000"
                 android:name="com.facebook.FacebookContentProvider"
                 android:exported="true" />
+
+            <receiver
+                android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver" android:exported="false">
+                <intent-filter>
+                    <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+                </intent-filter>
+            </receiver>
+
+            <!--
+                change "air.com.doitflash.exFacebook2" to your own package name
+            -->
+            <provider
+                android:name="com.facebook.marketing.internal.MarketingInitProvider"
+                android:authorities="air.com.doitflash.exFacebook2.MarketingInitProvider"
+                android:exported="false" />
 
             </application>
             </manifest>
@@ -157,13 +175,17 @@
         
         <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
         
-        <!-- The following dependency ANEs are required Download from https://github.com/myflashlab/common-dependencies-ANE -->
-        
-        <!-- This dependency is needed on Android and iOS -->
+        <!-- Needed on Android/iOS -->
         <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
         
-        <!-- This dependency is needed on Android ONLY. You may need to comment it out if necessary -->
-        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+        <!-- Needed on Android ONLY -->
+        <extensionID>com.myflashlab.air.extensions.dependency.bolts</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>
         
         
     </extensions>

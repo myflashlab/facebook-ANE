@@ -235,6 +235,7 @@ public class Main extends Sprite
 		trace("-");
 		trace("token: " + _accessToken.token);
 		trace("userId: " + _accessToken.userId);
+		trace("appId: " + _accessToken.appId);
 		trace("declinedPermissions: " + _accessToken.declinedPermissions);
 		trace("grantedPermissions: " + _accessToken.grantedPermissions);
 		trace("expiration: " + new Date(_accessToken.expiration).toLocaleDateString());
@@ -243,18 +244,40 @@ public class Main extends Sprite
 		
 		_list.removeAll();
 		
+		var btn0:MySprite = createBtn("isTokenActive?");
+		btn0.addEventListener(MouseEvent.CLICK, isTokenActive);
+		_list.add(btn0);
+		
+		function isTokenActive(e:MouseEvent):void
+		{
+			trace("isTokenActive: " + Facebook.auth.isCurrentAccessTokenActive());
+		}
+		
 		var btn1:MySprite = createBtn("logout");
 		btn1.addEventListener(MouseEvent.CLICK, toLogout);
 		_list.add(btn1);
 		
 		function toLogout(e:MouseEvent):void
 		{
+			C.log("logout and disconnect from facebook...");
+			
+			Facebook.graph.call(
+					"https://graph.facebook.com/v3.1/me/permissions",
+					URLRequestMethod.POST,
+					new URLVariables("method=delete"),
+					function ($dataStr:String, $graphRequest:String):void
+					{
+						trace($graphRequest);
+						trace($dataStr);
+						
 			Facebook.auth.logout();
 			_accessToken = null;
 			
 			C.log("user is logout");
 			
 			showLoginButton();
+		}
+			);
 		}
 		
 		var btn3:MySprite = createBtn("is Messenger Installed?");
@@ -272,7 +295,7 @@ public class Main extends Sprite
 		
 		function logEvent(e:MouseEvent):void
 		{
-			C.log("logEvent. check your facebook analytics page to see the logs. it may take some time for the logs to be seen there.")
+			C.log("logEvent. check your facebook analytics page to see the logs. it may take some time for the logs to be seen there.");
 			Facebook.appEvents.logEvent("myEvent", randomRange(50, 100), {var1:"value1", var2:"value2"});
 		}
 		
@@ -384,7 +407,7 @@ public class Main extends Sprite
 			C.log("callGraph");
 			
 			Facebook.graph.call(
-					"https://graph.facebook.com/v2.11/me",
+					"https://graph.facebook.com/v3.1/me",
 					URLRequestMethod.GET,
 					new URLVariables("fields=name,email,picture&metadata=0"),
 					function ($dataStr:String, $graphRequest:String):void

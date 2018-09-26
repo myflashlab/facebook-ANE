@@ -1,5 +1,38 @@
 Facebook SDK Adobe Air Native Extension
 
+*Sep 10, 2018 - V4.35.0*
+* Updated to the official Facebook SDK V4.35.0.
+  * If you see an error like ```Undefined symbols ___isOSVersionAtLeast``` when compiling the iOS side, please watch this video: https://www.youtube.com/watch?v=m4bwZRCvs2c  
+* Remove the androidSupport ANE from your project and from your manifest. *com.myflashlab.air.extensions.dependency.androidSupport*
+* We have split the androidSupport dependency for better performance. You need to include the following ANEs to your project instead of one androidSupport ANE:
+  * <extensionID>com.myflashlab.air.extensions.dependency.bolts</extensionID>
+  * <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>
+  * <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>
+  * <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>
+  * <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>
+  * <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>
+  * <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>
+* Added property ```appId``` to AccessToken instances
+* For expert users, now the ANE supports manual generation of AccessToken instance using the newly introduced method ```Facebook.auth.manualInit```. If you don't know what this method is, do not use it at all. Eventually, to use the generated AccessToken, we have made the ```Facebook.auth.currentAccessToken``` property writeable also so you can pass the AccessToken instance to it.
+* New method ```Facebook.auth.isCurrentAccessTokenActive``` introduced. This will tell you if the current AccessToken is active or not.
+* Upgrade to Facebook Graph API Version 3.1
+* Add the following receiver tag to your manifest:
+```xml
+<receiver
+    android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver" android:exported="false">
+    <intent-filter>
+        <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+    </intent-filter>
+</receiver>
+```
+* Add the following provider tag to your manifest but make sure you are replacing [PACKAGE_NAME] with your own app package name. Don't forget that Android AIR apps adds *air.* to the beginning of your package name.
+```xml
+<provider
+    android:name="com.facebook.marketing.internal.MarketingInitProvider"
+    android:authorities="[PACKAGE_NAME].MarketingInitProvider"
+    android:exported="false" />
+```
+
 *Apr 28, 2018 - V4.30.1*
 * Fixed issue [#129](https://github.com/myflashlab/facebook-ANE/issues/129)
 * Fixed issue [#128](https://github.com/myflashlab/facebook-ANE/issues/128)
