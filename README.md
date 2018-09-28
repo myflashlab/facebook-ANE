@@ -270,7 +270,19 @@ function toLogin():void
   - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
 4. Android SDK 19 or higher 
 5. iOS 9.0 or higher
-6. In case you see this error message ```Undefined symbols ___isOSVersionAtLeast``` when compiling for iOS, check out [this video clip](https://www.youtube.com/watch?v=m4bwZRCvs2c) to know how to resolve it.
+6. In case you see the following error messages when compiling for iOS, check out [this video clip](https://www.youtube.com/watch?v=m4bwZRCvs2c) to know how to resolve it.
+```
+ld: library not found for -lclang_rt.ios
+``` 
+or 
+```
+Undefined symbols ___isOSVersionAtLeast
+``` 
+7. There's aknown bug as follow on windows machines when compiling for iOS. To avoid that, you will need a Mac to compile your project for iOS. We are hoping that Adobe would fix this problem soon so the app can be correctly packaged on Windows machines also. vote up here https://tracker.adobe.com/#/view/AIR-4198557
+```
+ld: in C:\AIR_SDK\lib\aot/stub/FBSDKCoreKit.framework/FBSDKCoreKit(FBSDKApplicationDelegate.o), unsupported address encoding (A5) of personality function in CIE for architecture arm64
+Compilation failed while executing : ld64
+```
 
 # Commercial Version
 https://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
