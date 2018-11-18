@@ -1,4 +1,4 @@
-# Facebook SDK ANE V4.35.0 (Android + iOS)
+# Facebook SDK ANE V4.35.1 (Android + iOS)
 Use this AIR Native Extension to implement the latest official Facebook SDK into your AIR applications.
 
 Main features:
@@ -23,7 +23,7 @@ import com.myflashlab.air.extensions.fb.*;
 
 Facebook.init("000000000000000");
 
-// Add these listeners right after initializing the ANE
+// Add these listeners right after initializing the ANE but don't call any other method before FacebookEvents.INIT happens
 Facebook.listener.addEventListener(FacebookEvents.INIT, onAneInit);
 Facebook.listener.addEventListener(FacebookEvents.INVOKE, onAneInvoke);
 
@@ -294,6 +294,10 @@ https://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [Usage WIKI](https://github.com/myflashlab/facebook-ANE/wiki)
 
 # Changelog
+*Nov 17, 2018 - V4.35.1*
+* Works with OverrideAir ANE V5.6.1 or higher
+* Works with ANELAB V1.1.26 or higher
+
 *Sep 10, 2018 - V4.35.0*
 * Updated to the official Facebook SDK V4.35.0.
   * If you see an error like ```Undefined symbols ___isOSVersionAtLeast``` when compiling the iOS side, please watch this video: https://www.youtube.com/watch?v=m4bwZRCvs2c  

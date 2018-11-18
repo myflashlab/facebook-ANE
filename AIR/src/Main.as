@@ -157,7 +157,7 @@ public class Main extends Sprite
 		
 		Facebook.init("000000000000000");
 		
-		// Add these listeners right after initializing the ANE
+		// Add these listeners right after initializing the ANE but don't call any other method before FacebookEvents.INIT happens
 		Facebook.listener.addEventListener(FacebookEvents.INIT, onAneInit);
 		Facebook.listener.addEventListener(FacebookEvents.INVOKE, onAneInvoke);
 		
@@ -270,13 +270,13 @@ public class Main extends Sprite
 						trace($graphRequest);
 						trace($dataStr);
 						
-			Facebook.auth.logout();
-			_accessToken = null;
-			
-			C.log("user is logout");
-			
-			showLoginButton();
-		}
+						Facebook.auth.logout();
+						_accessToken = null;
+						
+						C.log("user is logout");
+						
+						showLoginButton();
+					}
 			);
 		}
 		

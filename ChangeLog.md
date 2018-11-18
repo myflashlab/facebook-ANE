@@ -1,5 +1,9 @@
 Facebook SDK Adobe Air Native Extension
 
+*Nov 17, 2018 - V4.35.1*
+* Works with OverrideAir ANE V5.6.1 or higher
+* Works with ANELAB V1.1.26 or higher
+
 *Sep 10, 2018 - V4.35.0*
 * Updated to the official Facebook SDK V4.35.0.
   * If you see an error like ```Undefined symbols ___isOSVersionAtLeast``` when compiling the iOS side, please watch this video: https://www.youtube.com/watch?v=m4bwZRCvs2c  
