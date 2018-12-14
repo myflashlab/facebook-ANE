@@ -1,4 +1,4 @@
-# Facebook SDK ANE V4.35.1 (Android + iOS)
+# Facebook SDK ANE (Android + iOS)
 Use this AIR Native Extension to implement the latest official Facebook SDK into your AIR applications.
 
 Main features:
@@ -11,10 +11,7 @@ Main features:
 * full access to Facebook Graph API... the sky is the limit!
 * works on Android and iOS with an identical AS3 library
 
-# asdoc
-[find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html)
-
-[Download demo ANE](https://github.com/myflashlab/facebook-ANE/tree/master/AIR/lib)
+[find the latest **asdoc** for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html)
 
 # AIR Usage
 ###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/AIR/src)
@@ -290,175 +287,9 @@ https://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/
 [![Facebook SDK ANE](https://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-facebook-2018-595x738.jpg)](https://www.myflashlabs.com/product/facebook-ane-adobe-air-native-extension/)
 
 # Tutorials
-[How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
-[Usage WIKI](https://github.com/myflashlab/facebook-ANE/wiki)
+* [How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
+* [Usage WIKI](https://github.com/myflashlab/facebook-ANE/wiki)
 
-# Changelog
-*Nov 17, 2018 - V4.35.1*
-* Works with OverrideAir ANE V5.6.1 or higher
-* Works with ANELAB V1.1.26 or higher
-
-*Sep 10, 2018 - V4.35.0*
-* Updated to the official Facebook SDK V4.35.0.
-  * If you see an error like ```Undefined symbols ___isOSVersionAtLeast``` when compiling the iOS side, please watch this video: https://www.youtube.com/watch?v=m4bwZRCvs2c  
-* Remove the androidSupport ANE from your project and from your manifest. *com.myflashlab.air.extensions.dependency.androidSupport*
-* We have split the androidSupport dependency into smaller ANEs for better performance. You need to include the following ANEs to your project instead of one androidSupport ANE:
-  * ```<extensionID>com.myflashlab.air.extensions.dependency.bolts</extensionID>```
-  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>```
-  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>```
-  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>```
-  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>```
-  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>```
-  * ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>```
-* Added property ```appId``` to AccessToken instances
-* For expert users, now the ANE supports manual generation of AccessToken instance using the newly introduced method ```Facebook.auth.manualInit```. If you don't know what this method is, do not use it at all. Eventually, to use the generated AccessToken, we have made the ```Facebook.auth.currentAccessToken``` property writeable also so you can pass the AccessToken instance to it.
-* New method ```Facebook.auth.isCurrentAccessTokenActive``` introduced. This will tell you if the current AccessToken is active or not.
-* Upgrade to Facebook Graph API Version 3.1
-* Add the following receiver tag to your manifest:
-```xml
-<receiver
-    android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver" android:exported="false">
-    <intent-filter>
-        <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
-    </intent-filter>
-</receiver>
-```
-* Add the following provider tag to your manifest but make sure you are replacing [PACKAGE_NAME] with your own app package name. Don't forget that Android AIR apps adds *air.* to the beginning of your package name.
-```xml
-<provider
-    android:name="com.facebook.marketing.internal.MarketingInitProvider"
-    android:authorities="[PACKAGE_NAME].MarketingInitProvider"
-    android:exported="false" />
-```
-
-*Apr 28, 2018 - V4.30.1*
-* Fixed issue [#129](https://github.com/myflashlab/facebook-ANE/issues/129)
-* Fixed issue [#128](https://github.com/myflashlab/facebook-ANE/issues/128)
-
-*Apr 4, 2018 - V4.30.0*
-* Updated to Facebook SDK V4.30.0 on both Android and iOS.
-* You need to update the iOS frameworks from [this package](https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.30.0.zip)
-  * FBSDKCoreKit.framework
-  * FBSDKLoginKit.framework
-  * FBSDKShareKit.framework
-  * Bolts.framework
-* Facebook Invites and Native Like buttons have been deprecated and are removed from the ANE.
-* AS3 API re-write from scratch to be able to work with Facebook SDK easier. In your AIR project, simply import ```import com.myflashlab.air.extensions.fb.*```.
-* asdoc location changed to **http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html**
-* Read wiki pages to learn how to initialize and access different Facebook APIs: https://github.com/myflashlab/facebook-ANE/wiki
-* You will need at least AIR SDK 28 to run this ANE.
-* Android API 19 is the oldest Android API version to be supported.
-* AIR Manifest changes:
-  * removed the tag ```<activity android:name="com.doitflash.facebook.access.MyLogin" ....```
-  * removed the tag ```<activity android:name="com.doitflash.facebook.sharing.MyShare" ...```
-  * removed the tag ```<activity android:name="com.doitflash.facebook.invite.MyInvite" ...```
-  * Added ```<string>fb-messenger-share-api</string>``` and ```<string>fb-messenger</string>``` to ```LSApplicationQueriesSchemes```.
-* A lot of new features are added like ```Facebook.games.requestDialog```, ```Facebook.isFacebookMessengerAppInstalled``` or ```Facebook.appEvents.logPurchase``` and many more. to learn about them, please read the wiki docs.
-
-*Dec 15, 2017 - V4.22.5*
-* Optimized for [ANE-LAB software](https://github.com/myflashlab/ANE-LAB/).
-
-*Sep 03, 2017 - V4.22.3*
-* Added callbacks to know when the like button is clicked, [requested here](https://github.com/myflashlab/facebook-ANE/issues/92). You need to listen to this event: ```FBEvent.LIKE_BTN_CLICKED```.
-
-*Aug 19, 2017 - V4.22.2*
-* Fixed bug #90
-* Added IntelliJ demo
-
-*May 16, 2017 - V4.22.1*
-* updated the core facebook SDK to V4.22.1
-* The ```FB.graph.request``` method along with the ```FB.graph.version``` property is removed. these were deprecated in the last release and are now removed. instead you have to use the [FB.graph.call](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/access/Graph.html#call()) method to access the graph.
-* new methods introduced: [FB.setUserId](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#setUserId()), [FB.clearUserId](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#clearUserId()) and  [FB.updateUserProperties](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/FB.html#updateUserProperties())
-* When using sharing a URL with ```FB.share(shareModel, onSharingResult);```, the shareModel object can only have the [contentURL](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/facebook/sharing/ShareLink.html#contentURL) property. Other properties are deprecated: (```contentDescription```, ```contentTitle``` and ```imageURL```)
-* You need to update your dependency files ```androidSupport.ane``` (required on Android ONLY) and ```overrideAir.ane``` (required on iOS+Android).
-* Min Air SDK is 25+
-* Min Android SDK is 15+
-* Min iOS SDK is 8+
-* You need to add the following changes to your manifest .xml file:
-  * Add ```<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="\ {FB_APP_ID}"/>```. **Notice the space after the ```\```**
-  * change two activities to following while replacing ```My App Name``` with your own app name. 
-  ```xml
-  <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="My App Name" />
-  <activity android:name="com.doitflash.facebook.access.MyLogin" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@style/Theme.Transparent" />
-  ``` 
-  * Add these activities while changing {FB_APP_ID} to your own Facebook App ID.
-  ```xml
-  <activity android:name="com.facebook.CustomTabMainActivity" />
-  <activity
-	  android:name="com.facebook.CustomTabActivity"
-	  android:exported="true">
-	  <intent-filter>
-		  <action android:name="android.intent.action.VIEW" />
-		  <category android:name="android.intent.category.DEFAULT" />
-		  <category android:name="android.intent.category.BROWSABLE" />
-		  <data android:scheme="fb{FB_APP_ID}" />
-	  </intent-filter>
-  </activity>
-  ```
-  * Don't forget to include other manifest settings. Above, we only mentioned what is changed.
-
-*Mar 17, 2017 - V4.17.1*
-* Updated the ANE with OverrideAIR V4.0.0 From now on, this ANE will also be needed for the iOS side too.
-
-*Nov 10, 2016 - V4.17.0*
-* Optimized for manual permissions required by AIR SDK 24+
-* Min AIR SDK 24 to compile this ANE with swf-version set to 35
-* updated the core facebook SDK to V4.17.0 - Make sure to update your current [Facebook frameworks for iOS](https://github.com/myflashlab/facebook-ANE/blob/master/FB_SDK_FRAMEWORKS.zip)
-* Min iOS to support this version is 8.0
-* Login activity has changed to:
-```xml
-<activity android:name="com.facebook.FacebookActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-```
-* You no longer need to whitelist Facebook domains.
-* Add Usage Description for PhotoLibrary by the Facebook SDK
-```xml
-<key>NSPhotoLibraryUsageDescription</key>
-<string>My description about why I need this feature in my app</string>
-```
-* Make sure to [update the common dependencies](https://github.com/myflashlab/common-dependencies-ANE): **overrideAir** and **androidSupport** to the latest version
-* The ```FB.graph.request()``` method and the ```FB.graph.version``` property is now depricated. Instead use the ```FB.graph.call()``` method and pass in the graph version directly:
-```actionscript
-FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE, onGraphResponse);
-FB.graph.addEventListener(FBEvent.GRAPH_RESPONSE_ERROR, onGraphError);
-FB.graph.call("https://graph.facebook.com/v2.8/me", URLRequestMethod.GET, new URLVariables("fields=name,email,picture&metadata=0"));
-```
-
-*May 16, 2016 - V4.11.0*
-* updated the core facebook SDK to [V4.11.0](https://developers.facebook.com/docs/android/change-log-4.x)
-* Support Android API 15 or higher
-* your app must be compiled with Air SDK 22 or higher
-* Added App Events support ```FB.logEvent(eventName, sum, params)```
-* Using Graph API v2.6
-* ```FB.logManager``` is now deprecated. you should use ```FB.auth``` instead
-* Updated the whitelist for facebook on iOS side of the manifest
-* From FB SDK 4.6 and higher, FB is forcing Safari View Controller (SVC) instead of fast-app-switching (FAS). It seems like a pain not to have the fast-app-switching anymore but Facebook says, this is actually a good thing! [Read here for more details](https://developers.facebook.com/blog/post/2015/10/29/Facebook-Login-iOS9/)
-* The iOS frameworks are updated to V4.11.0 **FB_SDK_FRAMEWORKS.zip**
-* Added ```event.graphRequest``` to ```FBEvent.GRAPH_RESPONSE``` and ```FBEvent.GRAPH_RESPONSE_ERROR``` so you will know what request to the graph you had sent previously
-* Some minor bug fixes
-
-
-*Jan 20, 2016 - V3.9.2*
-* bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
-
-
-*Dec 20, 2015 - V3.9.1*
-* minor bug fixes
-
-
-*Nov 02, 2015 - V3.9*
-* doitflash devs merged into MyFLashLab Team
-
-
-*Sep 08, 2015 - V3.0*
-* Added support for App invites https://developers.facebook.com/docs/app-invites
-* Fixed Like button bug in Android where the button interface was not being updated after coming back to the flash app
-* Requires commonDependenciesV4.0.ane or higher https://github.com/myflashlab/common-dependencies-ANE
-
-
-*Jul 31, 2015 - V2.0*
-* Added iOS support
-* Minor bug fixes on Android side
-
-
-*Jul 17, 2015 - V1.0*
-* beginning of the journey!
+# Premium Support #
+[![Premium Support package](https://www.myflashlabs.com/wp-content/uploads/2016/06/professional-support.jpg)](https://www.myflashlabs.com/product/myflashlabs-support/)
+If you are an [active MyFlashLabs club member](https://www.myflashlabs.com/product/myflashlabs-club-membership/), you will have access to our private and secure support ticket system for all our ANEs. Even if you are not a member, you can still receive premium help if you purchase the [premium support package](https://www.myflashlabs.com/product/myflashlabs-support/).

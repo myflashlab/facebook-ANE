@@ -27,21 +27,6 @@
         <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="Main">
           <files-to-package>
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/icons" path-in-package="icons" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-375w-667h@2x~iphone.png" path-in-package="Default-375w-667h@2x~iphone.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-414w-736h@3x~iphone.png" path-in-package="Default-414w-736h@3x~iphone.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-568h@2x~iphone.png" path-in-package="Default-568h@2x~iphone.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-Landscape-414w-736h@3x~iphone.png" path-in-package="Default-Landscape-414w-736h@3x~iphone.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-Landscape~ipad.png" path-in-package="Default-Landscape~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-LandscapeLeft@2x~ipad.png" path-in-package="Default-LandscapeLeft@2x~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-LandscapeRight@2x~ipad.png" path-in-package="Default-LandscapeRight@2x~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-LandscapeRight~ipad.png" path-in-package="Default-LandscapeRight~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-Landscapet@2x~ipad.png" path-in-package="Default-Landscapet@2x~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-Portrait@2x~ipad.png" path-in-package="Default-Portrait@2x~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-Portrait~ipad.png" path-in-package="Default-Portrait~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-PortraitUpsideDown@2x~ipad.png" path-in-package="Default-PortraitUpsideDown@2x~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default-PortraitUpsideDown~ipad.png" path-in-package="Default-PortraitUpsideDown~ipad.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default@2x~iphone.png" path-in-package="Default@2x~iphone.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Default~iphone.png" path-in-package="Default~iphone.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/icons/Assets.car" path-in-package="Assets.car" />
           </files-to-package>
           <AirSigningOptions keystore-path="$MODULE_DIR$/cert/dev.p12" provisioning-profile-path="$MODULE_DIR$/cert/comDoitflash.mobileprovision" />

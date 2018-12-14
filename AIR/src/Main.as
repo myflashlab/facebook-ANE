@@ -145,15 +145,13 @@ public class Main extends Sprite
 		}
 	}
 	
-	private function myDebuggerDelegate($ane:String, $class:String, $msg:String):void
-	{
-		trace("\t "+$ane+": "+$msg);
-	}
-	
 	private function init():void
 	{
-		// remove this line in production build or pass null as the delegate
-		OverrideAir.enableDebugger(myDebuggerDelegate);
+		// Remove OverrideAir debugger in production builds
+		OverrideAir.enableDebugger(function ($ane:String, $class:String, $msg:String):void
+		{
+			trace($ane+" ("+$class+") "+$msg);
+		});
 		
 		Facebook.init("000000000000000");
 		
@@ -162,7 +160,7 @@ public class Main extends Sprite
 		Facebook.listener.addEventListener(FacebookEvents.INVOKE, onAneInvoke);
 		
 		// You can receive the hashKey for your Android certificate like below.
-		if (Facebook.os == Facebook.ANDROID) trace("hash key = ", Facebook.hashKey);
+		if (OverrideAir.os == OverrideAir.ANDROID) trace("hash key = ", Facebook.hashKey);
 	}
 	
 	private function onAneInvoke(e:FacebookEvents):void
