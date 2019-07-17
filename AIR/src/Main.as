@@ -236,8 +236,10 @@ public class Main extends Sprite
 		trace("appId: " + _accessToken.appId);
 		trace("declinedPermissions: " + _accessToken.declinedPermissions);
 		trace("grantedPermissions: " + _accessToken.grantedPermissions);
+		trace("expiredPermissions: " + _accessToken.expiredPermissions);
 		trace("expiration: " + new Date(_accessToken.expiration).toLocaleDateString());
 		trace("lastRefresh: " + new Date(_accessToken.lastRefresh).toLocaleDateString());
+		trace("dataAccessExpirationDate: " + new Date(_accessToken.dataAccessExpirationDate).toLocaleDateString());
 		trace("-");
 		
 		_list.removeAll();
@@ -260,7 +262,7 @@ public class Main extends Sprite
 			C.log("logout and disconnect from facebook...");
 			
 			Facebook.graph.call(
-					"https://graph.facebook.com/v3.1/me/permissions",
+					"https://graph.facebook.com/v3.3/me/permissions",
 					URLRequestMethod.POST,
 					new URLVariables("method=delete"),
 					function ($dataStr:String, $graphRequest:String):void
@@ -405,7 +407,7 @@ public class Main extends Sprite
 			C.log("callGraph");
 			
 			Facebook.graph.call(
-					"https://graph.facebook.com/v3.1/me",
+					"https://graph.facebook.com/v3.3/me",
 					URLRequestMethod.GET,
 					new URLVariables("fields=name,email,picture&metadata=0"),
 					function ($dataStr:String, $graphRequest:String):void

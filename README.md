@@ -11,7 +11,7 @@ Main features:
 * full access to Facebook Graph API... the sky is the limit!
 * works on Android and iOS with an identical AS3 library
 
-[find the latest **asdoc** for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html)
+[find the latest **asdoc** for this ANE here.](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/fb/package-detail.html)
 
 # AIR Usage
 ###### Login sample. [find more samples in repository](https://github.com/myflashlab/facebook-ANE/tree/master/AIR/src)
@@ -25,7 +25,7 @@ Facebook.listener.addEventListener(FacebookEvents.INIT, onAneInit);
 Facebook.listener.addEventListener(FacebookEvents.INVOKE, onAneInvoke);
 
 // You can receive the hashKey for your Android certificate like below.
-if (Facebook.os == Facebook.ANDROID) trace("hash key = ", Facebook.hashKey);
+if (OverrideAir.os == OverrideAir.ANDROID) trace("hash key = ", Facebook.hashKey);
 
 function onAneInvoke(e:FacebookEvents):void
 {
@@ -81,8 +81,10 @@ function toLogin():void
 				trace("userId: " + _accessToken.userId);
 				trace("declinedPermissions: " + _accessToken.declinedPermissions);
 				trace("grantedPermissions: " + _accessToken.grantedPermissions);
+				trace("expiredPermissions: " + _accessToken.expiredPermissions);
 				trace("expiration: " + new Date(_accessToken.expiration).toLocaleDateString());
 				trace("lastRefresh: " + new Date(_accessToken.lastRefresh).toLocaleDateString());
+				trace("dataAccessExpirationDate: " + new Date(_accessToken.dataAccessExpirationDate).toLocaleDateString());
 			}
 		}
 	}
@@ -97,7 +99,7 @@ function toLogin():void
 		<uses-permission android:name="android.permission.WAKE_LOCK" />
 		<uses-permission android:name="android.permission.INTERNET" />
 		
-		<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26"/>
+		<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="28"/>
 		
 		<application 
 			android:hardwareAccelerated="true" 
@@ -154,23 +156,24 @@ function toLogin():void
 				</intent-filter>
 			</receiver>
 
-			<!--
-				change "[PACKAGE_NAME]" to your own package name
-			-->
-			<provider
-				android:name="com.facebook.marketing.internal.MarketingInitProvider"
-				android:authorities="[PACKAGE_NAME].MarketingInitProvider"
-				android:exported="false" />
+			<receiver
+                android:name="com.facebook.CampaignTrackingReceiver"
+                android:exported="true"
+                android:permission="android.permission.INSTALL_PACKAGES">
+                <intent-filter>
+                    <action android:name="com.android.vending.INSTALL_REFERRER"/>
+                </intent-filter>
+            </receiver>
 
 		</application>
 		
 </manifest>]]></manifestAdditions>
   </android>
   <iPhone>
-    <!-- A list of plist key/value pairs to be added to the application Info.plist -->
+
     <InfoAdditions>
 		<![CDATA[<key>MinimumOSVersion</key>
-		<string>8.0</string>
+		<string>10.0</string>
 		
 		<key>UIStatusBarStyle</key>
 		<string>UIStatusBarStyleBlackOpaque</string>
@@ -231,7 +234,6 @@ function toLogin():void
 	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
 
 	<!-- Needed on Android ONLY -->
-	<extensionID>com.myflashlab.air.extensions.dependency.bolts</extensionID>
 	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>
 	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>
 	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>
@@ -245,7 +247,6 @@ function toLogin():void
 # Requirements:
 1. This ANE is dependent on the following ANEs. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
 	* overrideAir.ane
-	* bolts.ane
 	* androidSupport-appcompatV7.ane
 	* androidSupport-arch.ane
 	* androidSupport-cardviewV7.ane
@@ -254,19 +255,16 @@ function toLogin():void
 	* androidSupport-v4.ane
 2. AIR SDK V30+
 3. To compile on iOS, you will need to add following Facebook frameworks to your Air SDK.
-  - download [FacebookSDKs-iOS-4.35.0.zip](https://origincache.facebook.com/developers/resources/?id=FacebookSDKs-iOS-4.35.0.zip) package and extract them on your computer.
+  - download [iOS Facebook SDK](https://github.com/facebook/facebook-objc-sdk/releases/download/v5.2.2/FacebookSDK_Static.zip) package and extract it on your computer.
     * FBSDKCoreKit.framework
     * FBSDKLoginKit.framework
     * FBSDKShareKit.framework
-    * Bolts.framework
-    * FBSDKMarketingKit.framework
-    * FBSDKMessengerShareKit.framework
     * FBSDKPlacesKit.framework
-  - you will see some xxxxxx.framework files. just copy them as they are and go to your AdobeAir SDK.
-  - when in your Air SDK, go to "\lib\aot\stub". here you will find all the iOS frameworks provided by Air SDK by default.
+  - you will see some xxxxxx.framework files. copy them as they are and go to your AdobeAIR SDK.
+  - when in your Air SDK, go to "\lib\aot\stub". there you will find all the iOS frameworks provided by Air SDK by default.
   - paste the facebook frameworks you had downloaded into this folder and you are ready to build your project.
 4. Android SDK 19 or higher 
-5. iOS 9.0 or higher
+5. iOS 10.0 or higher
 6. In case you see the following error messages when compiling for iOS, check out [this video clip](https://www.youtube.com/watch?v=m4bwZRCvs2c) to know how to resolve it.
 ```
 ld: library not found for -lclang_rt.ios

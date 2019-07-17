@@ -1,5 +1,56 @@
 Facebook SDK Adobe Air Native Extension
 
+*Jul 18, 2019 - V5.1.0*
+* Updated the [Android SDK to V5.1.0](https://github.com/facebook/facebook-android-sdk/blob/master/CHANGELOG.md?fbclid=IwAR3nmaW3U0KPJzlP4U5M4Bo4woUZ9bBGq2lFMrVOm4ZfRYUToBNsYlvK1_I#510---2019-06-21).
+* Updated the [iOS SDK to V5.2.2](https://github.com/facebook/facebook-objc-sdk/blob/master/CHANGELOG.md?fbclid=IwAR2WkBfJ4VbZoNMZKSYChtmHCZFqulpDKtLg1LOAAfRonnJhbSyOJimZ9L0#522)
+* Min iOS version to support this ANE is 10.0 .
+* Removed Bolt dependency from both Android and iOS sides.
+* On Android side you must add the following dependency ANEs:
+```xml
+<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>
+```
+* On iOS side you only need the ```<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>``` and the [following frameworks which you must have downloaded from here](https://github.com/facebook/facebook-objc-sdk/releases/download/v5.2.2/FacebookSDK_Static.zip)
+```
+FBSDKCoreKit.framework
+FBSDKLoginKit.framework
+FBSDKPlacesKit.framework
+FBSDKShareKit.framework
+```
+* trying to change *LoginBehavior* on iOS will have no effect! LoginBehavior on iOS will always work like how it's mentioned in the official docs:
+> logging in via ASWebAuthenticationSession (iOS 12+) or SFAuthenticationSession (iOS 11), which present specialized SafariViewControllers. Falls back to plain SFSafariViewController (iOS 9 and 10).
+
+* Removed ```Facebook.os``` property. Instead you should use ```OverrideAir.os```.
+* Added new properties to the ```AccessToken``` class:
+```actionscript
+_accessToken.dataAccessExpirationDate
+_accessToken.expiredPermissions
+```
+
+* Removed the following Android provider from the manifest:
+```xml
+<provider
+    android:name="com.facebook.marketing.internal.MarketingInitProvider"
+    android:authorities="[PACKAGE_NAME].MarketingInitProvider"
+    android:exported="false"/>
+```
+* Added the following Android service to the manifest:
+```xml
+<receiver
+    android:name="com.facebook.CampaignTrackingReceiver"
+    android:exported="true"
+    android:permission="android.permission.INSTALL_PACKAGES">
+    <intent-filter>
+        <action android:name="com.android.vending.INSTALL_REFERRER"/>
+    </intent-filter>
+</receiver>
+```
+
 *Nov 17, 2018 - V4.35.1*
 * Works with OverrideAir ANE V5.6.1 or higher
 * Works with ANELAB V1.1.26 or higher
