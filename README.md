@@ -255,7 +255,7 @@ function toLogin():void
 	* androidSupport-v4.ane
 2. AIR SDK V30+
 3. To compile on iOS, you will need to add following Facebook frameworks to your Air SDK.
-  - download [iOS Facebook SDK](https://github.com/facebook/facebook-objc-sdk/releases/download/v5.2.2/FacebookSDK_Static.zip) package and extract it on your computer.
+  - download [iOS Facebook SDK](https://github.com/facebook/facebook-objc-sdk/releases/download/v5.6.0/FacebookSDK_Static.zip) package and extract it on your computer.
     * FBSDKCoreKit.framework
     * FBSDKLoginKit.framework
     * FBSDKShareKit.framework

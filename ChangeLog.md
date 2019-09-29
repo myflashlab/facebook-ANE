@@ -1,5 +1,8 @@
 Facebook SDK Adobe Air Native Extension
 
+*Sep 26, 2019 - V5.5.1*
+* Update the Android SDK to V5.5.1 and the iOS SDK to V5.6.0. You should update the iOS frameworks with the ones found in [this package V5.6.0](https://github.com/facebook/facebook-objc-sdk/releases/download/v5.6.0/FacebookSDK_Static.zip)
+
 *Jul 18, 2019 - V5.1.0*
 * Updated the [Android SDK to V5.1.0](https://github.com/facebook/facebook-android-sdk/blob/master/CHANGELOG.md?fbclid=IwAR3nmaW3U0KPJzlP4U5M4Bo4woUZ9bBGq2lFMrVOm4ZfRYUToBNsYlvK1_I#510---2019-06-21).
 * Updated the [iOS SDK to V5.2.2](https://github.com/facebook/facebook-objc-sdk/blob/master/CHANGELOG.md?fbclid=IwAR2WkBfJ4VbZoNMZKSYChtmHCZFqulpDKtLg1LOAAfRonnJhbSyOJimZ9L0#522)
