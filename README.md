@@ -99,7 +99,7 @@ function toLogin():void
 		<uses-permission android:name="android.permission.WAKE_LOCK" />
 		<uses-permission android:name="android.permission.INTERNET" />
 		
-		<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="28"/>
+		<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28"/>
 		
 		<application 
 			android:hardwareAccelerated="true" 
@@ -234,26 +234,27 @@ function toLogin():void
 	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
 
 	<!-- Needed on Android ONLY -->
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.appcompatV7</extensionID>
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.arch</extensionID>
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.cardviewV7</extensionID>
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidx.arch</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidx.cardview</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidx.core</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidx.design</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidx.lifecycle</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.androidx.utils</extensionID>
 
   </extensions>
 ```
 
 # Requirements:
 1. This ANE is dependent on the following ANEs. [Download them from here:](https://github.com/myflashlab/common-dependencies-ANE)
-	* overrideAir.ane
-	* androidSupport-appcompatV7.ane
-	* androidSupport-arch.ane
-	* androidSupport-cardviewV7.ane
-	* androidSupport-core.ane
-	* androidSupport-customtabs.ane
-	* androidSupport-v4.ane
-2. AIR SDK V30+
+	- androidx_arch.ane
+	- androidx_cardview.ane
+	- androidx_core.ane
+	- androidx_design.ane
+	- androidx_lifecycle.ane
+	- androidx_utils.ane
+	- overrideAir.ane
+	- AIR SDK V30+
 3. To compile on iOS, you will need to add following Facebook frameworks to your Air SDK.
   - download [iOS Facebook SDK](https://github.com/facebook/facebook-objc-sdk/releases/download/v5.6.0/FacebookSDK_Static.zip) package and extract it on your computer.
     * FBSDKCoreKit.framework
@@ -273,7 +274,7 @@ or
 ```
 Undefined symbols ___isOSVersionAtLeast
 ``` 
-7. There's aknown bug as follow on windows machines when compiling for iOS. To avoid that, you will need a Mac to compile your project for iOS. We are hoping that Adobe would fix this problem soon so the app can be correctly packaged on Windows machines also. vote up here https://tracker.adobe.com/#/view/AIR-4198557
+7. There's a known bug as follow on windows machines when compiling for iOS. To avoid that, you will need a Mac to compile your project for iOS. We are hoping that Adobe would fix this problem soon so the app can be correctly packaged on Windows machines also. vote up here https://tracker.adobe.com/#/view/AIR-4198557
 ```
 ld: in C:\AIR_SDK\lib\aot/stub/FBSDKCoreKit.framework/FBSDKCoreKit(FBSDKApplicationDelegate.o), unsupported address encoding (A5) of personality function in CIE for architecture arm64
 Compilation failed while executing : ld64

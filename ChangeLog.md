@@ -1,4 +1,17 @@
-Facebook SDK Adobe Air Native Extension
+Facebook SDK Adobe AIR Native Extension
+
+*Apr 04, 2020 - V6.0.1*
+* Update the Android SDK to V6.0.0 and optimized for Androidx dependencies.
+* On Android side you must add the following dependency ANEs:
+```xml
+<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidx.arch</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidx.cardview</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidx.core</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidx.design</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidx.lifecycle</extensionID>
+<extensionID>com.myflashlab.air.extensions.dependency.androidx.utils</extensionID>
+```
 
 *Sep 26, 2019 - V5.5.1*
 * Update the Android SDK to V5.5.1 and the iOS SDK to V5.6.0. You should update the iOS frameworks with the ones found in [this package V5.6.0](https://github.com/facebook/facebook-objc-sdk/releases/download/v5.6.0/FacebookSDK_Static.zip)

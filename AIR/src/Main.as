@@ -1,7 +1,7 @@
 package
 {
 import com.myflashlab.air.extensions.fb.*;
-import com.myflashlab.air.extensions.dependency.*;
+import com.myflashlab.air.extensions.dependency.OverrideAir;
 
 import com.doitflash.consts.Direction;
 import com.doitflash.consts.Orientation;
@@ -124,6 +124,7 @@ public class Main extends Sprite
 	{
 		if (_txt)
 		{
+			_txt.y = 150 * (1 / DeviceInfo.dpiScaleMultiplier);
 			_txt.width = stage.stageWidth * (1 / DeviceInfo.dpiScaleMultiplier);
 			
 			C.x = 0;
@@ -250,6 +251,7 @@ public class Main extends Sprite
 		
 		function isTokenActive(e:MouseEvent):void
 		{
+			C.log("isTokenActive: " + Facebook.auth.isCurrentAccessTokenActive());
 			trace("isTokenActive: " + Facebook.auth.isCurrentAccessTokenActive());
 		}
 		
@@ -260,7 +262,8 @@ public class Main extends Sprite
 		function toLogout(e:MouseEvent):void
 		{
 			C.log("logout and disconnect from facebook...");
-			
+			trace("logout and disconnect from facebook...");
+
 			Facebook.graph.call(
 					"https://graph.facebook.com/v3.3/me/permissions",
 					URLRequestMethod.POST,
@@ -269,12 +272,13 @@ public class Main extends Sprite
 					{
 						trace($graphRequest);
 						trace($dataStr);
-						
+
 						Facebook.auth.logout();
 						_accessToken = null;
 						
 						C.log("user is logout");
-						
+						trace("user is logout");
+
 						showLoginButton();
 					}
 			);
@@ -287,6 +291,7 @@ public class Main extends Sprite
 		function isFacebookMessengerAppInstalled(e:MouseEvent):void
 		{
 			C.log("isFacebookMessengerAppInstalled: " + Facebook.isFacebookMessengerAppInstalled);
+			trace("isFacebookMessengerAppInstalled: " + Facebook.isFacebookMessengerAppInstalled);
 		}
 		
 		var btn4:MySprite = createBtn("log event");
@@ -296,6 +301,7 @@ public class Main extends Sprite
 		function logEvent(e:MouseEvent):void
 		{
 			C.log("logEvent. check your facebook analytics page to see the logs. it may take some time for the logs to be seen there.");
+			trace("logEvent. check your facebook analytics page to see the logs. it may take some time for the logs to be seen there.");
 			Facebook.appEvents.logEvent("myEvent", randomRange(50, 100), {var1:"value1", var2:"value2"});
 		}
 		
@@ -306,7 +312,8 @@ public class Main extends Sprite
 		function shareDialog(e:MouseEvent):void
 		{
 			C.log("sharing via dialog, please wait...");
-			
+			trace("sharing via dialog, please wait...");
+
 			var content:ShareLinkContent = new ShareLinkContent();
 			content.quote = "This is a test quote message...";
 			content.contentUrl = "https://myflashlabs.com/";
@@ -341,11 +348,13 @@ public class Main extends Sprite
 			if(!Facebook.isFacebookMessengerAppInstalled)
 			{
 				C.log("The messenger app is not installed on your device.");
+				trace("The messenger app is not installed on your device.");
 				return;
 			}
 			
 			C.log("sharing via messenger app, please wait...");
-			
+			trace("sharing via messenger app, please wait...");
+
 			var content:ShareLinkContent = new ShareLinkContent();
 			content.contentUrl = "https://myflashlabs.com/";
 			
@@ -370,7 +379,8 @@ public class Main extends Sprite
 		function sendGameRequest(e:MouseEvent):void
 		{
 			C.log("sendGameRequest");
-			
+			trace("sendGameRequest");
+
 			var requestContent:GameRequestContent = new GameRequestContent();
 			requestContent.message = "This is a message :)";
 			
@@ -405,9 +415,10 @@ public class Main extends Sprite
 		function callGraph(e:MouseEvent):void
 		{
 			C.log("callGraph");
-			
+			trace("callGraph");
+
 			Facebook.graph.call(
-					"https://graph.facebook.com/v3.3/me",
+					"https://graph.facebook.com/v5.0/me",
 					URLRequestMethod.GET,
 					new URLVariables("fields=name,email,picture&metadata=0"),
 					function ($dataStr:String, $graphRequest:String):void
@@ -421,50 +432,7 @@ public class Main extends Sprite
 		onResize();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	private function createBtn($str:String):MySprite
 	{
 		var sp:MySprite = new MySprite();
