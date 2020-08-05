@@ -1,4 +1,9 @@
-Facebook SDK Adobe AIR Native Extension
+# Facebook SDK Adobe AIR Native Extension
+
+*Jul 31, 2020 - v7.0.0*
+- Upgrade the Android SDK to v7.1.0. 
+- Upgrade dependencies to the latest versions.
+- Fixed some minor issues and refactor native codes.
 
 *Apr 04, 2020 - V6.0.1*
 * Update the Android SDK to V6.0.0 and optimized for Androidx dependencies.
